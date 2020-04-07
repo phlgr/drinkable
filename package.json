@@ -4,7 +4,12 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev:server": "npm run build && cd .. && npm start",
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -35,5 +40,10 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix",
     "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5"
   }
 }
