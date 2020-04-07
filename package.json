@@ -26,5 +26,14 @@
     "lint-staged": "^10.1.2",
     "nodemon": "^2.0.2",
     "prettier": "^2.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix",
+    "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   }
 }
