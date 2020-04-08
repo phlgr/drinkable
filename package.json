@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "heroku-prebuild": "cd client && npm ci",
     "client": "cd client && npm start",
     "build": "cd client && npm run build && npm run build-storybook",
     "storybook": "cd client && npm run storybook",
