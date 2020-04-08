@@ -1,5 +1,5 @@
 {
-  "name": "drinkable",
+  "name": "drinkables-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
