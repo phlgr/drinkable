@@ -9,8 +9,8 @@
     "storybook": "cd client && npm run storybook",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run storybook\"",
     "dev:server": "npm run build && cd .. && npm start",
-    "server": "nodemon index.js",
-    "start": "node index.js"
+    "server": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
