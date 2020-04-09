@@ -5,7 +5,7 @@ export default function GlobalStyles() {
   return (
     <Global
       styles={(theme) => css`
-        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
         *,
         *::after,
         *::before {
@@ -14,7 +14,7 @@ export default function GlobalStyles() {
         body {
           font-family: Comfortaa;
           font-size: 16px;
-          margin: 0;
+          margin: 0px;
           background: ${theme.background};
           height: 100vh;
           width: 100vw;
