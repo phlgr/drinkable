@@ -8,8 +8,11 @@ const Button = styled.button`
   font-size: 1.7rem;
   border: none;
   border-radius: 10px;
-  padding: 0px 20px;
-  margin: 20px 0;
+  padding: 20px 15px;
+  width: ${(props) => (props.full ? '100%' : 'auto')};
+  line-height: 20px;
+  outline: 0;
+  box-shadow: 0 3px 6px black;
 `;
 
 export default Button;
