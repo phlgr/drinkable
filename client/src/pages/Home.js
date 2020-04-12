@@ -8,6 +8,7 @@ import backgroundImage from '../assets/home-background.png';
 
 const PrimaryContainer = styled.div`
   background-image: url("${backgroundImage}");
+  background-size: cover;
   color: #fff;
   padding: 20px 20px;
   display: flex;
@@ -15,7 +16,6 @@ const PrimaryContainer = styled.div`
   justify-content: flex-end;
   align-items:flex-end;
   max-height: 300px;
-  
 `;
 const InfoText = styled.div`
   line-height: 26px;
