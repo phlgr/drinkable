@@ -12,7 +12,7 @@ const Button = styled.button`
   width: ${(props) => (props.full ? '100%' : 'auto')};
   line-height: 20px;
   outline: 0;
-  box-shadow: 0 3px 6px black;
+  box-shadow: 0 3px 10px grey;
 `;
 
 export default Button;
