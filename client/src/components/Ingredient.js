@@ -15,8 +15,8 @@ const IngredientSelector = styled.button`
       ? `
   transition: 2s;
   color: #fff;
-  border: 3px solid ${(props) => props.theme.secondaryActive};
-  background: ${(props) => props.theme.secondaryActive}
+  border: 3px solid ${props.theme.secondaryActive};
+  background: ${props.theme.secondaryActive}
   `
       : ''}
 `;
