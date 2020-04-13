@@ -8,13 +8,11 @@ const Blur = styled.div`
       ? `
         position: absolute;
         top: 0;
-        left: 0;
-        z-index: 999;
-        height: 100vh;
-        width: 100vw;
-        filter: blur(4px);
+        right: 0;
+        height: 100%;
+        width: 100%;
+        filter: alpha(opacity = 50);
         background: ${props.theme.secondaryActive};
-        opacity: 0.8;
         `
       : ''}
 `;
@@ -22,7 +20,7 @@ const Blur = styled.div`
 const IngredientHeader = styled.h2`
   color: ${(props) => props.theme.secondaryActive};
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 2.4rem;
   margin: 0;
 `;
 
@@ -45,7 +43,8 @@ const ModalArea = styled.div`
 export default function Modal(props) {
   return (
     <>
-      <Blur active={props.active} {...props}></Blur>
+      aohjsdöjwööoadfböoj
+      <Blur active={props.active}></Blur>
       <ModalContainer>
         <ModalArea>
           <IngredientHeader>{props.ingredient}</IngredientHeader>
