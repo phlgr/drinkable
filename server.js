@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const ingredients = require('./lib/routes/ingredients');
+const drinks = require('./lib/routes/drinks');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/ingredients', ingredients);
+app.use('/api/drinks', drinks);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (request, response) => {
