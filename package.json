@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "heroku-prebuild": "cd client && npm ci",
+    "heroku-prebuild": "cd client && npm i",
     "client": "cd client && npm start",
     "build": "cd client && npm run build && npm run build-storybook",
     "storybook": "cd client && npm run storybook",
@@ -50,5 +50,9 @@
   },
   "nodemonConfig": {
     "delay": "1000"
-  }
+  },
+  "cacheDirectories": [
+    "client/node_modules",
+    "node_modules"
+  ]
 }
