@@ -24,11 +24,7 @@ const SearchField = styled.input`
 `;
 
 export default function SearchInput(props) {
-  return (
-    <>
-      <SearchField placeholder={props.placeholder} />
-    </>
-  );
+  return <SearchField placeholder={props.placeholder} />;
 }
 
 SearchInput.propTypes = {
