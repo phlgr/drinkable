@@ -12,7 +12,7 @@ export default function GlobalStyles() {
           box-sizing: border-box;
         }
         body {
-          font-family: Comfortaa;
+          font-family: 'Comfortaa';
           font-size: 16px;
           margin: 0px;
           background: ${theme.background};
