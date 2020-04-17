@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 
+const { initDatabase } = require('./lib/database');
+const { setIngredientsDB } = require('./lib/models/ingredients');
+
 const ingredients = require('./lib/routes/ingredients');
 const drinks = require('./lib/routes/drinks');
 const party = require('./lib/routes/party');
@@ -20,6 +23,14 @@ app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+initDatabase(process.env.MONGO_URL, process.env.MONGO_DB_NAME).then(
+  async () => {
+    console.log(`Database ${process.env.MONGO_DB_NAME} is ready`);
+
+    await setIngredientsDB();
+
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  }
+);
