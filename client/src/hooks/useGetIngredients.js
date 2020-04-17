@@ -8,8 +8,6 @@ export default function useGetIngredients() {
 
   async function doGetIngredients() {
     try {
-      setLoading(true);
-      setError(false);
       const ingredients = await getIngredients();
       setIngredients(ingredients);
     } catch (error) {
