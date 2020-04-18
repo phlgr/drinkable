@@ -13,15 +13,17 @@ const BorderContainer = styled.div`
   padding: 20px;
 `;
 
-const HeaderContainer = styled.div``;
+const HeaderContainer = styled.div`
+  height: auto;
+`;
 
 const ContentContainer = styled.div`
-  flex-grow: 1;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: auto;
 `;
 
-const FooterContainer = styled.div`
-  justify-content: flex-end;
-`;
+const FooterContainer = styled.div``;
 
 export default function PartyContainer(props) {
   return (
