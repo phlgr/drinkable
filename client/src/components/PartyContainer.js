@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin-bottom: auto;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const FooterContainer = styled.div``;
