@@ -6,4 +6,4 @@ export default {
   component: PartyContainer,
 };
 
-export const ContainerEmpty = () => <PartyContainer>w</PartyContainer>;
+export const ContainerEmpty = () => <PartyContainer></PartyContainer>;
