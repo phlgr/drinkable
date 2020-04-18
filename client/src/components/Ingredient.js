@@ -19,6 +19,7 @@ const IngredientSelector = styled.button`
   background: ${props.theme.secondaryActive}
   `
       : ''}
+  margin:2px;
 `;
 
 export default function Ingredient(props) {

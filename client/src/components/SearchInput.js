@@ -16,7 +16,7 @@ const SearchField = styled.input`
   background-position: 5px 30%;
   padding-left: 30px;
 
-  width: 90%;
+  width: 100%;
   outline: none;
   &::placeholder {
     color: ${(props) => props.theme.primary};
@@ -24,7 +24,7 @@ const SearchField = styled.input`
 `;
 
 export default function SearchInput(props) {
-  return <SearchField placeholder={props.placeholder} />;
+  return <SearchField placeholder={props.placeholder} {...props} />;
 }
 
 SearchInput.propTypes = {

@@ -7,21 +7,24 @@ import Button from './Button';
 
 const BorderContainer = styled.div`
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   width: 100vw;
   height: 100vh;
   padding: 20px;
 `;
 
-const HeaderContainer = styled.div``;
+const HeaderContainer = styled.div`
+  height: auto;
+`;
 
 const ContentContainer = styled.div`
-  flex-grow: 1;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: auto;
+  overflow: scroll;
 `;
 
-const FooterContainer = styled.div`
-  justify-content: flex-end;
-`;
+const FooterContainer = styled.div``;
 
 export default function PartyContainer(props) {
   return (

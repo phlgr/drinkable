@@ -1,6 +1,8 @@
 import React from 'react';
 import { getIngredients } from '../api/ingredients';
 
+import Ingredient from '../components/Ingredient';
+
 export default function useGetIngredients() {
   const [ingredients, setIngredients] = React.useState(null);
   const [error, setError] = React.useState(false);
@@ -9,7 +11,10 @@ export default function useGetIngredients() {
   async function doGetIngredients() {
     try {
       const ingredients = await getIngredients();
-      setIngredients(ingredients);
+      const ingredientSelectors = ingredients.map((ingredient) => (
+        <Ingredient key={ingredient}>{ingredient}</Ingredient>
+      ));
+      setIngredients(ingredientSelectors);
     } catch (error) {
       setError(true);
     } finally {
