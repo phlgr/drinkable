@@ -1,7 +1,10 @@
-export function getIngredients() {
-  return fetch(`/api/ingredients`, {
-    method: 'GET',
-  })
+export function getIngredients(searchValue) {
+  return fetch(
+    `/api/ingredients${searchValue ? `/filter?q=${searchValue}` : ''}`,
+    {
+      method: 'GET',
+    }
+  )
     .then((response) => {
       if (response.status !== 200) {
         throw new Error(response.statusText);
