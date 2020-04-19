@@ -10,6 +10,7 @@ const IngredientSelector = styled.button`
   border-radius: 10px;
   background: none;
   outline: none;
+  margin: 2px;
   ${(props) =>
     props.selected
       ? `
@@ -19,7 +20,6 @@ const IngredientSelector = styled.button`
   background: ${props.theme.secondaryActive}
   `
       : ''}
-  margin:2px;
 `;
 
 export default function Ingredient(props) {
