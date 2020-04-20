@@ -44,5 +44,5 @@ export default function Ingredient(props) {
 }
 
 Ingredient.propTypes = {
-  onSelect: PropTypes.object,
+  onSelect: PropTypes.func,
 };
