@@ -3,7 +3,7 @@ import { getIngredients } from '../api/ingredients';
 
 import Ingredient from '../components/Ingredient';
 
-export default function useGetIngredients(searchValue) {
+export default function useGetIngredients(searchValue, handleSelect) {
   const [ingredients, setIngredients] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
@@ -12,7 +12,9 @@ export default function useGetIngredients(searchValue) {
     try {
       const ingredients = await getIngredients(searchValue);
       const ingredientSelectors = ingredients.map((ingredient) => (
-        <Ingredient key={ingredient.name}>{ingredient.name}</Ingredient>
+        <Ingredient onSelect={handleSelect} key={ingredient.name}>
+          {ingredient.name}
+        </Ingredient>
       ));
       setIngredients(ingredientSelectors);
     } catch (error) {
