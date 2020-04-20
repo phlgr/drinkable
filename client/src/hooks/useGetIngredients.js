@@ -3,16 +3,16 @@ import { getIngredients } from '../api/ingredients';
 
 import Ingredient from '../components/Ingredient';
 
-export default function useGetIngredients() {
+export default function useGetIngredients(searchValue) {
   const [ingredients, setIngredients] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
   async function doGetIngredients() {
     try {
-      const ingredients = await getIngredients();
+      const ingredients = await getIngredients(searchValue);
       const ingredientSelectors = ingredients.map((ingredient) => (
-        <Ingredient key={ingredient}>{ingredient}</Ingredient>
+        <Ingredient key={ingredient.name}>{ingredient.name}</Ingredient>
       ));
       setIngredients(ingredientSelectors);
     } catch (error) {
@@ -24,7 +24,7 @@ export default function useGetIngredients() {
 
   React.useEffect(() => {
     doGetIngredients();
-  }, []);
+  }, [searchValue]);
 
-  return [{ ingredients, error, loading }, doGetIngredients];
+  return [{ ingredients, error, loading }];
 }

@@ -8,7 +8,7 @@ import useGetIngredients from '../hooks/useGetIngredients';
 
 export default function Ingredients() {
   const [searchValue, setSearchValue] = React.useState('');
-  const [{ ingredients, error, loading }] = useGetIngredients();
+  const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
 
   function handleChange(value) {
     setSearchValue(value);
