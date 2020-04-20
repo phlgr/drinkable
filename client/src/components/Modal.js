@@ -9,19 +9,14 @@ import plusSVG from '../assets/plus-circle.svg';
 import Button from '../components/Button';
 
 const Blur = styled.div`
-  ${(props) =>
-    props.active
-      ? `
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        background: ${props.theme.secondaryActive};
-        opacity: 0.8;
-        backdrop-filter: blur(10px);
-        `
-      : ''}
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: ${(props) => props.theme.secondaryActive};
+  opacity: 0.8;
+  backdrop-filter: blur(10px);
 `;
 
 const IngredientHeader = styled.h2`
@@ -32,6 +27,7 @@ const IngredientHeader = styled.h2`
 `;
 
 const ModalContainer = styled.div`
+  visibility: ${(props) => (props.hidden ? 'hidden' : 'visible')};
   width: 100vw;
   height: 80vh;
   display: flex;
@@ -85,17 +81,41 @@ const ModalFooter = styled.div`
   }
 `;
 
-const SVG = styled.img``;
+const SVG = styled.img`
+  cursor: pointer;
+`;
 
 export default function Modal(props) {
-  function addUp() {}
-  function subtract() {}
-  function closeModal() {}
+  const [hidden, setHidden] = React.useState(false);
+  const [amount, setAmount] = React.useState('3l');
+
+  function addUp() {
+    const newAmount = `${
+      parseInt(amount.match(/\d+/g).map(Number), 10) + 1
+    }l`.toString();
+    console.log(newAmount);
+    setAmount(newAmount);
+  }
+  function subtract() {
+    const newAmount = `${
+      parseInt(amount.match(/\d+/g).map(Number), 10) - 1
+    }l`.toString();
+    if (parseInt(newAmount.match(/\d+/g).map(Number), 10) <= 0) {
+      setAmount('0l');
+      return;
+    } else {
+      console.log(newAmount);
+      setAmount(newAmount);
+    }
+  }
+  function closeModal() {
+    setHidden(true);
+  }
   return (
     <>
       aohjsdöjwööoadfböoj
-      <Blur active={props.active}></Blur>
-      <ModalContainer>
+      <Blur active={props.active} hidden={hidden}></Blur>
+      <ModalContainer hidden={hidden}>
         <ModalArea>
           <ModalHeader>
             <IngredientHeader>{props.ingredient}</IngredientHeader>
@@ -103,7 +123,10 @@ export default function Modal(props) {
           </ModalHeader>
           <ModalContent>
             <SVG src={minusSVG} onClick={subtract} />
-            <ModalInput></ModalInput>
+            <ModalInput
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
+            ></ModalInput>
             <SVG src={plusSVG} onClick={addUp} />
           </ModalContent>
           <ModalFooter>
