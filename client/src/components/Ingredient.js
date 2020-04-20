@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const IngredientSelector = styled.button`
+  transition: 200ms;
   font-family: Comfortaa;
   color: ${(props) => props.theme.secondaryActive};
   padding: 4px 10px;
@@ -14,7 +16,7 @@ const IngredientSelector = styled.button`
   ${(props) =>
     props.selected
       ? `
-  transition: 2s;
+  transition: 200ms;
   color: #fff;
   border: 3px solid ${props.theme.secondaryActive};
   background: ${props.theme.secondaryActive}
@@ -23,9 +25,24 @@ const IngredientSelector = styled.button`
 `;
 
 export default function Ingredient(props) {
+  const [selected, setSelected] = React.useState(false);
+
+  const handleClick = (name) => {
+    setSelected(!selected);
+
+    props.onSelect(name);
+  };
   return (
     <>
-      <IngredientSelector {...props}></IngredientSelector>
+      <IngredientSelector
+        onClick={(event) => handleClick(event.target.innerText)}
+        selected={selected}
+        {...props}
+      ></IngredientSelector>
     </>
   );
 }
+
+Ingredient.propTypes = {
+  onSelect: PropTypes.object,
+};
