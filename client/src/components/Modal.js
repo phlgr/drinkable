@@ -9,19 +9,14 @@ import plusSVG from '../assets/plus-circle.svg';
 import Button from '../components/Button';
 
 const Blur = styled.div`
-  ${(props) =>
-    props.active
-      ? `
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        background: ${props.theme.secondaryActive};
-        opacity: 0.8;
-        backdrop-filter: blur(10px);
-        `
-      : ''}
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: ${(props) => props.theme.secondaryActive};
+  opacity: 0.8;
+  backdrop-filter: blur(10px);
 `;
 
 const IngredientHeader = styled.h2`
@@ -32,6 +27,7 @@ const IngredientHeader = styled.h2`
 `;
 
 const ModalContainer = styled.div`
+  visibility: ${(props) => (props.hidden ? 'hidden' : 'visible')};
   width: 100vw;
   height: 80vh;
   display: flex;
@@ -59,7 +55,7 @@ const ModalContent = styled.div`
   display: flex;
   justify-content: center;
   flex-basis: 100%;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 `;
 
 const ModalInput = styled.input`
@@ -76,6 +72,16 @@ const ModalInput = styled.input`
   color: ${(props) => props.theme.secondary};
 `;
 
+const ModalAmounts = styled.div`
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  margin: 5px 0 10px 0;
+  > * {
+    transform: scale(0.8);
+  }
+`;
+
 const ModalFooter = styled.div`
   display: flex;
   flex-basis: 100%;
@@ -85,17 +91,46 @@ const ModalFooter = styled.div`
   }
 `;
 
-const SVG = styled.img``;
+const SVG = styled.img`
+  cursor: pointer;
+`;
 
 export default function Modal(props) {
-  function addUp() {}
-  function subtract() {}
-  function closeModal() {}
+  const [hidden, setHidden] = React.useState(false);
+  const [amount, setAmount] = React.useState('3l');
+
+  function extractNumber(value) {
+    return parseFloat(value);
+  }
+  function addUp() {
+    const newAmount = `${extractNumber(amount) + 1}l`.toString();
+    console.log(newAmount);
+    setAmount(newAmount);
+  }
+  function subtract() {
+    if (extractNumber(amount) <= 0) {
+      setAmount('0l');
+      return;
+    }
+    const newAmount = `${extractNumber(amount) - 1}l`.toString();
+    setAmount(newAmount);
+  }
+  function handleInput(input) {
+    setAmount(input);
+  }
+
+  function handleAmountButtonClick(amount) {
+    setAmount(amount);
+  }
+
+  function closeModal() {
+    setHidden(true);
+  }
   return (
     <>
       aohjsdöjwööoadfböoj
-      <Blur active={props.active}></Blur>
-      <ModalContainer>
+      <Blur active={props.active} hidden={hidden}></Blur>
+      <ModalContainer hidden={hidden}>
         <ModalArea>
           <ModalHeader>
             <IngredientHeader>{props.ingredient}</IngredientHeader>
@@ -103,9 +138,30 @@ export default function Modal(props) {
           </ModalHeader>
           <ModalContent>
             <SVG src={minusSVG} onClick={subtract} />
-            <ModalInput></ModalInput>
+            <ModalInput
+              value={amount}
+              onChange={(event) => handleInput(event.target.value)}
+            ></ModalInput>
             <SVG src={plusSVG} onClick={addUp} />
           </ModalContent>
+          <ModalAmounts>
+            <Button
+              background={'secondaryActive'}
+              onClick={(event) =>
+                handleAmountButtonClick(event.target.innerText)
+              }
+            >
+              0.7l
+            </Button>
+            <Button
+              background={'secondaryActive'}
+              onClick={(event) =>
+                handleAmountButtonClick(event.target.innerText)
+              }
+            >
+              1.5l
+            </Button>
+          </ModalAmounts>
           <ModalFooter>
             <Button full background={'primary'}>
               Remove
