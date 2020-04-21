@@ -13,6 +13,7 @@ const Button = styled.button`
   line-height: 20px;
   outline: 0;
   box-shadow: 0 3px 10px grey;
+  cursor: pointer;
 `;
 
 export default Button;
