@@ -11,7 +11,6 @@ export default function Ingredients() {
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
 
   const handleSelect = (name) => {
-    console.log(selectedIngredients);
     const newIngredients = selectedIngredients;
     if (selectedIngredients.includes(name)) {
       const itemIndex = newIngredients.indexOf(name);
@@ -20,6 +19,7 @@ export default function Ingredients() {
       newIngredients.push(name);
     }
     setSelectedIngredients(newIngredients);
+    console.log(selectedIngredients);
   };
 
   const [{ ingredients, error, loading }] = useGetIngredients(
