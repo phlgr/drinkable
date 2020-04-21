@@ -97,16 +97,16 @@ export default function Modal(props) {
     setAmount(newAmount);
   }
   function subtract() {
+    if (parseInt(amount.match(/\d+/g).map(Number), 10) === 0) {
+      setAmount('0l');
+      return;
+    }
     const newAmount = `${
       parseInt(amount.match(/\d+/g).map(Number), 10) - 1
     }l`.toString();
-    if (parseInt(newAmount.match(/\d+/g).map(Number), 10) <= 0) {
-      setAmount('0l');
-      return;
-    } else {
-      console.log(newAmount);
-      setAmount(newAmount);
-    }
+
+    console.log(newAmount);
+    setAmount(newAmount);
   }
   function closeModal() {
     setHidden(true);
