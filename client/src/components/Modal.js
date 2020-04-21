@@ -55,7 +55,7 @@ const ModalContent = styled.div`
   display: flex;
   justify-content: center;
   flex-basis: 100%;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 `;
 
 const ModalInput = styled.input`
@@ -70,6 +70,16 @@ const ModalInput = styled.input`
   font-size: 3rem;
   text-align: center;
   color: ${(props) => props.theme.secondary};
+`;
+
+const ModalAmounts = styled.div`
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  margin: 5px 0 10px 0;
+  > * {
+    transform: scale(0.8);
+  }
 `;
 
 const ModalFooter = styled.div`
@@ -89,25 +99,30 @@ export default function Modal(props) {
   const [hidden, setHidden] = React.useState(false);
   const [amount, setAmount] = React.useState('3l');
 
+  function extractNumber(value) {
+    return parseFloat(value);
+  }
   function addUp() {
-    const newAmount = `${
-      parseInt(amount.match(/\d+/g).map(Number), 10) + 1
-    }l`.toString();
+    const newAmount = `${extractNumber(amount) + 1}l`.toString();
     console.log(newAmount);
     setAmount(newAmount);
   }
   function subtract() {
-    if (parseInt(amount.match(/\d+/g).map(Number), 10) === 0) {
+    if (extractNumber(amount) <= 0) {
       setAmount('0l');
       return;
     }
-    const newAmount = `${
-      parseInt(amount.match(/\d+/g).map(Number), 10) - 1
-    }l`.toString();
-
-    console.log(newAmount);
+    const newAmount = `${extractNumber(amount) - 1}l`.toString();
     setAmount(newAmount);
   }
+  function handleInput(input) {
+    setAmount(input);
+  }
+
+  function handleAmountButtonClick(amount) {
+    setAmount(amount);
+  }
+
   function closeModal() {
     setHidden(true);
   }
@@ -125,10 +140,28 @@ export default function Modal(props) {
             <SVG src={minusSVG} onClick={subtract} />
             <ModalInput
               value={amount}
-              onChange={(event) => setAmount(event.target.value)}
+              onChange={(event) => handleInput(event.target.value)}
             ></ModalInput>
             <SVG src={plusSVG} onClick={addUp} />
           </ModalContent>
+          <ModalAmounts>
+            <Button
+              background={'secondaryActive'}
+              onClick={(event) =>
+                handleAmountButtonClick(event.target.innerText)
+              }
+            >
+              0.7l
+            </Button>
+            <Button
+              background={'secondaryActive'}
+              onClick={(event) =>
+                handleAmountButtonClick(event.target.innerText)
+              }
+            >
+              1.5l
+            </Button>
+          </ModalAmounts>
           <ModalFooter>
             <Button full background={'primary'}>
               Remove
