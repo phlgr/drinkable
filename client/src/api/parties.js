@@ -1,5 +1,5 @@
 function postParty() {
-  return fetch('/api/party', {
+  return fetch('/api/parties', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ function postParty() {
 }
 
 function getParty(partyId) {
-  return fetch(`/api/party/${partyId}`)
+  return fetch(`/api/parties/${partyId}`)
     .then((response) => {
       if (response.status !== 200) {
         throw new Error(response.statusText);
@@ -31,7 +31,7 @@ function getParty(partyId) {
 }
 
 function patchParty(partyId, content) {
-  return fetch(`/api/party/${partyId}`, {
+  return fetch(`/api/parties/${partyId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
