@@ -1,5 +1,5 @@
 import React from 'react';
-import { patchParty } from '../api/party';
+import { patchParty } from '../api/parties';
 
 export default function usePatchParty(partyId, content) {
   const [response, setResponse] = React.useState(null);
