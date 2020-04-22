@@ -9,11 +9,25 @@ function postParty() {
       ingredients: {},
       drinks: {},
     },
-  });
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error(response.statusText);
+      }
+      return response;
+    })
+    .then((response) => response.json());
 }
 
 function getParty(partyId) {
-  return fetch(`/api/party/${partyId}`);
+  return fetch(`/api/party/${partyId}`)
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error(response.statusText);
+      }
+      return response;
+    })
+    .then((response) => response.json());
 }
 
 function patchParty(partyId, content) {
