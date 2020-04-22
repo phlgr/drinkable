@@ -1,5 +1,5 @@
 import React from 'react';
-import { postParty } from '../api/party';
+import { postParty } from '../api/parties';
 
 export default function usePostParty() {
   const [partyId, setPartyId] = React.useState(null);
