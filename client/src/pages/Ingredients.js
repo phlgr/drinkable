@@ -3,12 +3,14 @@ import React from 'react';
 import PartyContainer from '../components/PartyContainer';
 import SearchInput from '../components/SearchInput';
 import Loading from '../components/Loading';
+import Ingredient from '../components/Ingredient';
 
 import useGetIngredients from '../hooks/useGetIngredients';
 
 export default function Ingredients() {
   const [searchValue, setSearchValue] = React.useState('');
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
+  const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
 
   const handleSelect = (name) => {
     const newIngredients = selectedIngredients;
@@ -21,11 +23,6 @@ export default function Ingredients() {
     setSelectedIngredients(newIngredients);
     console.log(selectedIngredients);
   };
-
-  const [{ ingredients, error, loading }] = useGetIngredients(
-    searchValue,
-    handleSelect
-  );
 
   function handleButtonClick() {
     console.log('You clicked me!');
@@ -50,7 +47,15 @@ export default function Ingredients() {
         ></SearchInput>
         {loading && <Loading />}
         {error && <p>Error!</p>}
-        {ingredients && ingredients}
+        {ingredients &&
+          ingredients.map((ingredient) => (
+            <Ingredient
+              onSelect={() => handleSelect(ingredient.name)}
+              key={ingredient.name}
+            >
+              {ingredient.name}
+            </Ingredient>
+          ))}
       </PartyContainer>
     </>
   );
