@@ -7,7 +7,7 @@ const { setIngredientsDB } = require('./lib/models/ingredients');
 
 const ingredients = require('./lib/routes/ingredients');
 const drinks = require('./lib/routes/drinks');
-const party = require('./lib/routes/party');
+const parties = require('./lib/routes/parties');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use('/api/ingredients', ingredients);
 app.use('/api/drinks', drinks);
-app.use('/api/party', party);
+app.use('/api/parties', parties);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (request, response) => {
