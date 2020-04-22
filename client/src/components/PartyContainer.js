@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 import Header from './Header.js';
 import PartyName from './PartyName';
@@ -26,7 +27,7 @@ const ContentContainer = styled.div`
 
 const FooterContainer = styled.div``;
 
-export default function PartyContainer(props) {
+export default function PartyContainer({ button, ...props }) {
   return (
     <>
       <BorderContainer>
@@ -36,11 +37,15 @@ export default function PartyContainer(props) {
         </HeaderContainer>
         <ContentContainer {...props}></ContentContainer>
         <FooterContainer>
-          <Button full background="primary">
-            Continue
+          <Button onClick={button.onClick} full background="primary">
+            {button.label}
           </Button>
         </FooterContainer>
       </BorderContainer>
     </>
   );
 }
+
+PartyContainer.propTypes = {
+  button: PropTypes.object,
+};
