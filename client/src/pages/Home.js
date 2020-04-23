@@ -50,8 +50,8 @@ export default function Home() {
           Organise the drinks of your next Party with drinkable!
         </InfoText>
         <Button background="primary" onClick={partyButtonHandleCLick}>
-          {!loading && 'Plan a Party!'}
-          {loading && <Loading />}
+          {!loading && !error && 'Plan a Party!'}
+          {loading && <Loading white />}
           {error && 'Try again!'}
         </Button>
       </PrimaryContainer>
