@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+
+import usePatchParty from '../hooks/usePatchParty';
+import Loading from '../components/Loading';
 
 import Edit from '../assets/pencil-icon.svg';
 import Save from '../assets/checkmark.svg';
@@ -31,14 +35,29 @@ const PartyNameInput = styled.input`
   border-bottom: 3px solid ${(props) => props.theme.secondaryActive};
 `;
 
-export default function PartyName({ partyName }) {
+export default function PartyName(props) {
   const [edit, setEdit] = React.useState(false);
+  const [partyName, setPartyName] = React.useState(props.partyName);
+  const [partyNameInput, setPartyNameInput] = React.useState('');
+  const { id } = useParams();
+  const [{ error, loading }, doPatch] = usePatchParty(id, {
+    name: partyName,
+  });
 
   function handleEditClick() {
     setEdit(true);
   }
 
-  function handleSaveClick() {}
+  React.useEffect(() => {
+    if (partyName) {
+      doPatch();
+    }
+  }, [partyName]);
+
+  function handleSaveClick() {
+    setPartyName(partyNameInput);
+    setEdit(false);
+  }
   return (
     <>
       <PartyNameContainer>
@@ -50,8 +69,14 @@ export default function PartyName({ partyName }) {
         )}
         {edit && (
           <>
-            <PartyNameInput placeholder={partyName} />
-            <EditButton onClick={handleSaveClick} src={Save} />
+            <PartyNameInput
+              value={partyNameInput}
+              onChange={(event) => setPartyNameInput(event.target.value)}
+              placeholder={partyName}
+            />
+            {!loading && <EditButton onClick={handleSaveClick} src={Save} />}
+            {loading && <Loading />}
+            {error && 'Error'}
           </>
         )}
       </PartyNameContainer>
