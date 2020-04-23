@@ -4,11 +4,11 @@ function postParty() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
+    body: JSON.stringify({
       name: 'Your Party',
       ingredients: {},
       drinks: {},
-    },
+    }),
   })
     .then((response) => {
       if (response.status !== 200) {
