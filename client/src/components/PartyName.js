@@ -56,6 +56,7 @@ export default function PartyName(props) {
 
   function handleSaveClick() {
     setPartyName(partyNameInput);
+    setPartyNameInput('');
     setEdit(false);
   }
   return (
