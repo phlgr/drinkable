@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/ingredients">
+          <Route exact path="/party/:id/ingredients">
             <Ingredients />
           </Route>
         </Switch>
