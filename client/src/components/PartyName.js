@@ -55,7 +55,9 @@ export default function PartyName(props) {
   }, [partyName]);
 
   function handleSaveClick() {
-    setPartyName(partyNameInput);
+    if (partyNameInput) {
+      setPartyName(partyNameInput);
+    }
     setPartyNameInput('');
     setEdit(false);
   }
