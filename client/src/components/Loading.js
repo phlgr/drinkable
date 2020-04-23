@@ -13,7 +13,7 @@ const LoadingAnimation = styled.div`
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: ${(props) => props.theme.primary};
+    background: ${(props) => (props.white ? '#fff' : props.theme.primary)};
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   div:nth-of-type(1) {
@@ -59,17 +59,16 @@ const LoadingAnimation = styled.div`
 `;
 
 const LoadingWrapper = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export default function Loading() {
+export default function Loading(props) {
   return (
     <LoadingWrapper>
-      <LoadingAnimation>
+      <LoadingAnimation {...props}>
         <div></div>
         <div></div>
         <div></div>

@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+
 import { useHistory } from 'react-router-dom';
+import usePostParty from '../hooks/usePostParty';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
 import backgroundImage from '../assets/home-background.png';
+import Loading from '../components/Loading';
 
 const PrimaryContainer = styled.div`
   background-image: url("${backgroundImage}");
@@ -27,10 +30,17 @@ const InfoText = styled.div`
 `;
 
 export default function Home() {
-  let history = useHistory();
+  const [{ partyId, error, loading }, doPost] = usePostParty();
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (partyId) {
+      history.push(`/party/${partyId}/ingredients`);
+    }
+  }, [partyId]);
 
   function partyButtonHandleCLick() {
-    history.push('/ingredients');
+    doPost();
   }
   return (
     <>
@@ -40,7 +50,9 @@ export default function Home() {
           Organise the drinks of your next Party with drinkable!
         </InfoText>
         <Button background="primary" onClick={partyButtonHandleCLick}>
-          Plan a Party!
+          {!loading && !error && 'Plan a Party!'}
+          {loading && <Loading white />}
+          {error && 'Try again!'}
         </Button>
       </PrimaryContainer>
     </>
