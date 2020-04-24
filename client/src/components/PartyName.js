@@ -36,29 +36,22 @@ const PartyNameInput = styled.input`
 `;
 
 export default function PartyName(props) {
-  const [edit, setEdit] = React.useState(false);
-  const [partyName, setPartyName] = React.useState(props.partyName);
-  const [partyNameInput, setPartyNameInput] = React.useState('');
   const { id } = useParams();
+  const [edit, setEdit] = React.useState(false);
+  const [partyName, setPartyName] = React.useState(props.name);
   const [{ error, loading }, doPatch] = usePatchParty(id, {
     name: partyName,
   });
 
   function handleEditClick() {
+    setPartyName('');
     setEdit(true);
   }
 
-  React.useEffect(() => {
+  function handleSaveClick() {
     if (partyName) {
       doPatch();
     }
-  }, [partyName]);
-
-  function handleSaveClick() {
-    if (partyNameInput) {
-      setPartyName(partyNameInput);
-    }
-    setPartyNameInput('');
     setEdit(false);
   }
   return (
@@ -73,9 +66,9 @@ export default function PartyName(props) {
         {edit && (
           <>
             <PartyNameInput
-              value={partyNameInput}
-              onChange={(event) => setPartyNameInput(event.target.value)}
-              placeholder={partyName}
+              value={partyName}
+              onChange={(event) => setPartyName(event.target.value)}
+              placeholder={props.name}
             />
             {!loading && <EditButton onClick={handleSaveClick} src={Save} />}
             {loading && <Loading />}
@@ -88,5 +81,5 @@ export default function PartyName(props) {
 }
 
 PartyName.propTypes = {
-  partyName: PropTypes.string,
+  name: PropTypes.string,
 };

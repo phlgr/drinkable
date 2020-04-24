@@ -46,7 +46,7 @@ export default function Ingredients() {
             label: 'Continue',
             onClick: handleButtonClick,
           }}
-          partyName={{ name: party.name }}
+          party={{ name: party.name }}
         >
           <SearchInput
             value={searchValue}
