@@ -14,7 +14,10 @@ export default function Ingredients() {
   const [searchValue, setSearchValue] = React.useState('');
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
   const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
-  const [{ party, getError, getLoading }, doGetParty] = useGetParty(id);
+  const [
+    { party, error: partyError, loading: partyLoading },
+    doGetParty,
+  ] = useGetParty(id);
 
   const handleSelect = (name) => {
     const newIngredients = selectedIngredients;
@@ -36,10 +39,14 @@ export default function Ingredients() {
     setSearchValue(value);
   }
 
+  const partyIngredientNames = party
+    ? party.ingredients.map((partyIngredient) => partyIngredient.name)
+    : [];
+
   return (
     <>
-      {getError && 'Error!'}
-      {getLoading && <Loading />}
+      {partyLoading && <Loading />}
+      {partyError && <p>No party found :(</p>}
       {party && (
         <PartyContainer
           button={{
@@ -59,6 +66,7 @@ export default function Ingredients() {
           {ingredients &&
             ingredients.map((ingredient) => (
               <Ingredient
+                selected={partyIngredientNames.includes(ingredient.name)}
                 onSelect={() => handleSelect(ingredient.name)}
                 key={ingredient.name}
               >
