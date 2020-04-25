@@ -36,7 +36,7 @@ function patchParty(partyId, content) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: content,
+    body: JSON.stringify(content),
   });
 }
 

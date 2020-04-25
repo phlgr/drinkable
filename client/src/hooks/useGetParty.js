@@ -22,5 +22,5 @@ export default function useGetParty(partyId) {
     doGet();
   }, [partyId]);
 
-  return [{ party, error, loading }];
+  return [{ party, error, loading }, doGet];
 }
