@@ -27,13 +27,18 @@ const ContentContainer = styled.div`
 
 const FooterContainer = styled.div``;
 
-export default function PartyContainer({ button, party, ...props }) {
+export default function PartyContainer({
+  button,
+  party,
+  onPartyNameChange,
+  ...props
+}) {
   return (
     <>
       <BorderContainer>
         <HeaderContainer>
           <Header />
-          <PartyName name={party.name} />
+          <PartyName name={party.name} onChange={onPartyNameChange} />
         </HeaderContainer>
         <ContentContainer {...props}></ContentContainer>
         <FooterContainer>
@@ -49,4 +54,5 @@ export default function PartyContainer({ button, party, ...props }) {
 PartyContainer.propTypes = {
   button: PropTypes.object,
   party: PropTypes.object,
+  onPartyNameChange: PropTypes.func,
 };
