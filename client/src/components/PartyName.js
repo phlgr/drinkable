@@ -51,9 +51,13 @@ export default function PartyName(props) {
   function handleSaveClick() {
     if (partyName) {
       doPatch();
+      props.onChange();
+    } else {
+      setPartyName(props.name);
     }
     setEdit(false);
   }
+
   return (
     <>
       <PartyNameContainer>
@@ -82,4 +86,5 @@ export default function PartyName(props) {
 
 PartyName.propTypes = {
   name: PropTypes.string,
+  onChange: PropTypes.func,
 };
