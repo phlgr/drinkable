@@ -14,7 +14,7 @@ export default function Ingredients() {
   const [searchValue, setSearchValue] = React.useState('');
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
   const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
-  const [{ party, getError, getLoading }] = useGetParty(id);
+  const [{ party, getError, getLoading }, doGetParty] = useGetParty(id);
 
   const handleSelect = (name) => {
     const newIngredients = selectedIngredients;
@@ -46,6 +46,8 @@ export default function Ingredients() {
             label: 'Continue',
             onClick: handleButtonClick,
           }}
+          party={party}
+          onPartyNameChange={doGetParty}
         >
           <SearchInput
             value={searchValue}

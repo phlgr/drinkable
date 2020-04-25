@@ -6,4 +6,4 @@ export default {
   component: PartyName,
 };
 
-export const Name = () => <PartyName />;
+export const Name = () => <PartyName partyName={'Your Party'} />;

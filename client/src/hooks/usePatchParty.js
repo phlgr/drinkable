@@ -19,9 +19,5 @@ export default function usePatchParty(partyId, content) {
     }
   }
 
-  React.useEffect(() => {
-    doPatch();
-  }, [content]);
-
-  return [{ response, error, loading }];
+  return [{ response, error, loading }, doPatch];
 }
