@@ -25,18 +25,11 @@ const IngredientSelector = styled.button`
 `;
 
 export default function Ingredient(props) {
-  const [selected, setSelected] = React.useState(false);
-
-  const handleClick = (name) => {
-    setSelected(!selected);
-
-    props.onSelect(name);
-  };
   return (
     <>
       <IngredientSelector
-        onClick={(event) => handleClick(event.target.innerText)}
-        selected={selected}
+        onClick={(event) => props.onSelect(event.target.innerText)}
+        selected={props.selected}
         {...props}
       ></IngredientSelector>
     </>
@@ -45,4 +38,5 @@ export default function Ingredient(props) {
 
 Ingredient.propTypes = {
   onSelect: PropTypes.func,
+  selected: PropTypes.bool,
 };
