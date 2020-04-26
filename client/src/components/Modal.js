@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 import closeSVG from '../assets/md-close-circle.svg';
 import minusSVG from '../assets/minus-circle.svg';
 import plusSVG from '../assets/plus-circle.svg';
 
 import Button from '../components/Button';
+import usePatchParty from '../hooks/usePatchParty';
+import Loading from './Loading';
 
 const Blur = styled.div`
   position: absolute;
@@ -96,18 +99,26 @@ const SVG = styled.img`
 `;
 
 export default function Modal({ ingredient, toggleModal }) {
+  const { id } = useParams();
+  const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
+  const [{ loading }, doPatch] = usePatchParty(id, content);
+
+  React.useEffect(() => {
+    if (content) {
+      doPatch();
+    }
+  }, [content]);
 
   function extractNumber(value) {
     return parseFloat(value);
   }
   function addUp() {
     const newAmount = `${extractNumber(amount) + 1}l`.toString();
-    console.log(newAmount);
     setAmount(newAmount);
   }
   function subtract() {
-    if (extractNumber(amount) <= 0) {
+    if (extractNumber(amount) <= 1) {
       setAmount('0l');
       return;
     }
@@ -124,6 +135,19 @@ export default function Modal({ ingredient, toggleModal }) {
 
   function closeModal() {
     toggleModal();
+  }
+
+  function handleAddButtonClick() {
+    setContent({
+      ingredients: {
+        name: ingredient,
+        quantity: amount,
+      },
+    });
+  }
+
+  function handleRemoveButtonClick() {
+    return;
   }
 
   return (
@@ -162,11 +186,20 @@ export default function Modal({ ingredient, toggleModal }) {
             </Button>
           </ModalAmounts>
           <ModalFooter>
-            <Button full background={'primary'}>
+            <Button
+              onClick={handleRemoveButtonClick}
+              full
+              background={'primary'}
+            >
               Remove
             </Button>
-            <Button full background={'secondary'}>
-              Add
+            <Button
+              onClick={handleAddButtonClick}
+              full
+              background={'secondary'}
+            >
+              {!loading && 'Add'}
+              {loading && <Loading white />}
             </Button>
           </ModalFooter>
         </ModalArea>
