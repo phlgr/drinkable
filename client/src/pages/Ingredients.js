@@ -8,28 +8,29 @@ import Ingredient from '../components/Ingredient';
 
 import useGetIngredients from '../hooks/useGetIngredients';
 import useGetParty from '../hooks/useGetParty';
+import Modal from '../components/Modal';
 
 export default function Ingredients() {
   const { id } = useParams();
   const [searchValue, setSearchValue] = React.useState('');
-  const [selectedIngredients, setSelectedIngredients] = React.useState([]);
   const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
+  const [modal, setModal] = React.useState(false);
+  const [currentIngredient, setCurrentIngredient] = React.useState('');
   const [
     { party, error: partyError, loading: partyLoading },
     doGetParty,
   ] = useGetParty(id);
 
-  const handleSelect = (name) => {
-    const newIngredients = selectedIngredients;
-    if (selectedIngredients.includes(name)) {
-      const itemIndex = newIngredients.indexOf(name);
-      newIngredients.splice(itemIndex, 1);
-    } else {
-      newIngredients.push(name);
-    }
-    setSelectedIngredients(newIngredients);
-    console.log(selectedIngredients);
+  const handleIngredientSelect = (name) => {
+    setCurrentIngredient(name);
+    setModal(true);
   };
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const handleSubmitModal = () => {};
 
   function handleButtonClick() {
     console.log('You clicked me!');
@@ -48,32 +49,42 @@ export default function Ingredients() {
       {partyLoading && <Loading />}
       {partyError && <p>No party found :(</p>}
       {party && (
-        <PartyContainer
-          button={{
-            label: 'Continue',
-            onClick: handleButtonClick,
-          }}
-          party={party}
-          onPartyNameChange={doGetParty}
-        >
-          <SearchInput
-            value={searchValue}
-            onChange={(event) => handleChange(event.target.value)}
-            placeholder={'Search ingredients'}
-          ></SearchInput>
-          {loading && <Loading />}
-          {error && <p>Error!</p>}
-          {ingredients &&
-            ingredients.map((ingredient) => (
-              <Ingredient
-                selected={partyIngredientNames.includes(ingredient.name)}
-                onSelect={() => handleSelect(ingredient.name)}
-                key={ingredient.name}
-              >
-                {ingredient.name}
-              </Ingredient>
-            ))}
-        </PartyContainer>
+        <>
+          {modal && (
+            <Modal
+              toggleModal={toggleModal}
+              onSubmit={handleSubmitModal}
+              ingredient={currentIngredient}
+            />
+          )}
+
+          <PartyContainer
+            button={{
+              label: 'Continue',
+              onClick: handleButtonClick,
+            }}
+            party={party}
+            onPartyNameChange={doGetParty}
+          >
+            <SearchInput
+              value={searchValue}
+              onChange={(event) => handleChange(event.target.value)}
+              placeholder={'Search ingredients'}
+            ></SearchInput>
+            {loading && <Loading />}
+            {error && <p>Error!</p>}
+            {ingredients &&
+              ingredients.map((ingredient) => (
+                <Ingredient
+                  selected={partyIngredientNames.includes(ingredient.name)}
+                  onSelect={() => handleIngredientSelect(ingredient.name)}
+                  key={ingredient.name}
+                >
+                  {ingredient.name}
+                </Ingredient>
+              ))}
+          </PartyContainer>
+        </>
       )}
     </>
   );
