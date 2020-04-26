@@ -40,9 +40,7 @@ export default function Ingredients() {
     setSearchValue(value);
   }
 
-  const partyIngredientNames = party
-    ? party.ingredients.map((partyIngredient) => partyIngredient.name)
-    : [];
+  const partyIngredientNames = party ? Object.keys(party.ingredients) : [];
 
   return (
     <>
