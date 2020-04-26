@@ -12,8 +12,8 @@ const Blur = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: ${(props) => props.theme.secondaryActive};
   opacity: 0.8;
   backdrop-filter: blur(10px);
@@ -28,8 +28,9 @@ const IngredientHeader = styled.h2`
 
 const ModalContainer = styled.div`
   visibility: ${(props) => (props.hidden ? 'hidden' : 'visible')};
+  position: absolute;
   width: 100vw;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +129,6 @@ export default function Modal(props) {
   }
   return (
     <>
-      aohjsdöjwööoadfböoj
       <Blur active={props.active} hidden={hidden}></Blur>
       <ModalContainer hidden={hidden}>
         <ModalArea>
