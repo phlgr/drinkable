@@ -102,13 +102,19 @@ export default function Modal({ ingredient, toggleModal }) {
   const { id } = useParams();
   const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
-  const [{ loading }, doPatch] = usePatchParty(id, content);
+  const [{ response, loading }, doPatch] = usePatchParty(id, content);
 
   React.useEffect(() => {
     if (content) {
       doPatch();
     }
   }, [content]);
+
+  React.useEffect(() => {
+    if (response) {
+      toggleModal();
+    }
+  }, [response]);
 
   function extractNumber(value) {
     return parseFloat(value);
