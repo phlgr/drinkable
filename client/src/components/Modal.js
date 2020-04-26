@@ -98,7 +98,7 @@ const SVG = styled.img`
   cursor: pointer;
 `;
 
-export default function Modal({ ingredient, toggleModal }) {
+export default function Modal({ ingredient, toggleModal, onIngredientChange }) {
   const { id } = useParams();
   const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
@@ -113,6 +113,7 @@ export default function Modal({ ingredient, toggleModal }) {
   React.useEffect(() => {
     if (response) {
       toggleModal();
+      onIngredientChange();
     }
   }, [response]);
 
@@ -215,4 +216,5 @@ export default function Modal({ ingredient, toggleModal }) {
 Modal.propTypes = {
   ingredient: PropTypes.string.isRequired,
   toggleModal: PropTypes.func,
+  onIngredientChange: PropTypes.func,
 };

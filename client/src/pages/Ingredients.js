@@ -53,6 +53,7 @@ export default function Ingredients() {
               toggleModal={toggleModal}
               onSubmit={handleSubmitModal}
               ingredient={currentIngredient}
+              onIngredientChange={doGetParty}
             />
           )}
 
