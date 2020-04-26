@@ -10,7 +10,7 @@ const BorderContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 20px;
 `;
 
