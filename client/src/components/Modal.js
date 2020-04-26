@@ -27,7 +27,6 @@ const IngredientHeader = styled.h2`
 `;
 
 const ModalContainer = styled.div`
-  visibility: ${(props) => (props.hidden ? 'hidden' : 'visible')};
   position: absolute;
   width: 100vw;
   height: 90vh;
@@ -96,8 +95,7 @@ const SVG = styled.img`
   cursor: pointer;
 `;
 
-export default function Modal(props) {
-  const [hidden, setHidden] = React.useState(false);
+export default function Modal({ ingredient, toggleModal }) {
   const [amount, setAmount] = React.useState('3l');
 
   function extractNumber(value) {
@@ -125,15 +123,16 @@ export default function Modal(props) {
   }
 
   function closeModal() {
-    setHidden(true);
+    toggleModal();
   }
+
   return (
     <>
-      <Blur active={props.active} hidden={hidden}></Blur>
-      <ModalContainer hidden={hidden}>
+      <Blur />
+      <ModalContainer>
         <ModalArea>
           <ModalHeader>
-            <IngredientHeader>{props.ingredient}</IngredientHeader>
+            <IngredientHeader>{ingredient}</IngredientHeader>
             <SVG src={closeSVG} onClick={closeModal} />
           </ModalHeader>
           <ModalContent>
@@ -177,6 +176,6 @@ export default function Modal(props) {
 }
 
 Modal.propTypes = {
-  active: PropTypes.bool,
   ingredient: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func,
 };
