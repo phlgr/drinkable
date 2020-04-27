@@ -25,7 +25,7 @@ const BackButton = styled.img`
 `;
 
 const DrinkName = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 `;
 
 const ContentContainer = styled.div`
@@ -53,6 +53,7 @@ const Ingredient = styled.p`
 `;
 
 const InstructionContainer = styled.div`
+  padding: 5px;
   flex-basis: 100%;
 `;
 
@@ -66,7 +67,7 @@ export default function Drink() {
       <Header />
       <HeaderContainer>
         <BackButton src={Arrow} />
-        <DrinkName>Mojito</DrinkName>
+        <DrinkName>3-Mile Long Island Ice Tea</DrinkName>
       </HeaderContainer>
       <ContentContainer>
         <CocktailThumbnail
