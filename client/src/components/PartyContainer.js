@@ -7,9 +7,10 @@ import PartyName from './PartyName';
 import Button from './Button';
 
 const BorderContainer = styled.div`
+  position: fixed;
   display: flex;
   flex-flow: column nowrap;
-  width: 100vw;
+  width: 100%;
   max-height: 100%;
   padding: 20px;
 `;

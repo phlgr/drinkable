@@ -19,9 +19,6 @@ export default function GlobalStyles() {
           height: 100%;
           width: 100vw;
         }
-        html {
-          height: 100%;
-        }
       `}
     />
   );
