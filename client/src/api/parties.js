@@ -6,8 +6,8 @@ function postParty() {
     },
     body: JSON.stringify({
       name: 'Your Party',
-      ingredients: [],
-      drinks: [],
+      ingredients: {},
+      drinks: {},
     }),
   })
     .then((response) => {
