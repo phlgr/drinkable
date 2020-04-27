@@ -24,7 +24,7 @@ export default function Party() {
         <PartyContainer
           button={{
             label: 'Manage Ingredients',
-            onClick: 'handleButtonClick',
+            onClick: () => console.log('Clicked me!'),
           }}
           party={party}
           onPartyNameChange={doGetParty}

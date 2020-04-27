@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ThumbnailContainer = styled.div`
   display: flex;
-  width: calc(50% - 10px);
+  flex-basis: calc(50% - 10px);
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -19,14 +19,14 @@ const ThumbnailContainer = styled.div`
   background-size: 100%;
   border-radius: 20px;
   height: 80px;
-  font-size: 5vw;
+  font-size: 1rem;
   padding: 5px;
   margin: 5px;
   cursor: pointer;
 `;
 
 export default function Thumbnail({ src, name }) {
-  return <ThumbnailContainer src={`${src}`}>{name}</ThumbnailContainer>;
+  return <ThumbnailContainer src={src}>{name}</ThumbnailContainer>;
 }
 
 Thumbnail.propTypes = {
