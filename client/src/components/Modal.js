@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 import closeSVG from '../assets/md-close-circle.svg';
 import minusSVG from '../assets/minus-circle.svg';
 import plusSVG from '../assets/plus-circle.svg';
 
 import Button from '../components/Button';
+import usePatchParty from '../hooks/usePatchParty';
+import Loading from './Loading';
 
 const Blur = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: ${(props) => props.theme.secondaryActive};
   opacity: 0.8;
   backdrop-filter: blur(10px);
@@ -27,9 +30,9 @@ const IngredientHeader = styled.h2`
 `;
 
 const ModalContainer = styled.div`
-  visibility: ${(props) => (props.hidden ? 'hidden' : 'visible')};
+  position: absolute;
   width: 100vw;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,20 +98,34 @@ const SVG = styled.img`
   cursor: pointer;
 `;
 
-export default function Modal(props) {
-  const [hidden, setHidden] = React.useState(false);
+export default function Modal({ ingredient, toggleModal, onIngredientChange }) {
+  const { id } = useParams();
+  const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
+  const [{ response, loading }, doPatch] = usePatchParty(id, content);
+
+  React.useEffect(() => {
+    if (content) {
+      doPatch();
+    }
+  }, [content]);
+
+  React.useEffect(() => {
+    if (response) {
+      toggleModal();
+      onIngredientChange();
+    }
+  }, [response]);
 
   function extractNumber(value) {
     return parseFloat(value);
   }
   function addUp() {
     const newAmount = `${extractNumber(amount) + 1}l`.toString();
-    console.log(newAmount);
     setAmount(newAmount);
   }
   function subtract() {
-    if (extractNumber(amount) <= 0) {
+    if (extractNumber(amount) <= 1) {
       setAmount('0l');
       return;
     }
@@ -124,16 +141,26 @@ export default function Modal(props) {
   }
 
   function closeModal() {
-    setHidden(true);
+    toggleModal();
   }
+
+  function handleAddButtonClick() {
+    setContent({
+      [`ingredients.${ingredient}`]: { quantity: amount },
+    });
+  }
+
+  function handleRemoveButtonClick() {
+    return;
+  }
+
   return (
     <>
-      aohjsdöjwööoadfböoj
-      <Blur active={props.active} hidden={hidden}></Blur>
-      <ModalContainer hidden={hidden}>
+      <Blur />
+      <ModalContainer>
         <ModalArea>
           <ModalHeader>
-            <IngredientHeader>{props.ingredient}</IngredientHeader>
+            <IngredientHeader>{ingredient}</IngredientHeader>
             <SVG src={closeSVG} onClick={closeModal} />
           </ModalHeader>
           <ModalContent>
@@ -163,11 +190,20 @@ export default function Modal(props) {
             </Button>
           </ModalAmounts>
           <ModalFooter>
-            <Button full background={'primary'}>
+            <Button
+              onClick={handleRemoveButtonClick}
+              full
+              background={'primary'}
+            >
               Remove
             </Button>
-            <Button full background={'secondary'}>
-              Add
+            <Button
+              onClick={handleAddButtonClick}
+              full
+              background={'secondary'}
+            >
+              {!loading && 'Add'}
+              {loading && <Loading white />}
             </Button>
           </ModalFooter>
         </ModalArea>
@@ -177,6 +213,7 @@ export default function Modal(props) {
 }
 
 Modal.propTypes = {
-  active: PropTypes.bool,
   ingredient: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func,
+  onIngredientChange: PropTypes.func,
 };
