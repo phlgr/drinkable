@@ -145,9 +145,8 @@ export default function Modal({ ingredient, toggleModal, onIngredientChange }) {
   }
 
   function handleAddButtonClick() {
-    const dotNotation = `ingredients.${ingredient}`;
     setContent({
-      [dotNotation]: { quantity: amount },
+      [`ingredients.${ingredient}`]: { quantity: amount },
     });
   }
 
