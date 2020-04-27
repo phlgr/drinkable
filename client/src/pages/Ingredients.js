@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import PartyContainer from '../components/PartyContainer';
 import SearchInput from '../components/SearchInput';
@@ -11,6 +11,7 @@ import useGetParty from '../hooks/useGetParty';
 import Modal from '../components/Modal';
 
 export default function Ingredients() {
+  const history = useHistory();
   const { id } = useParams();
   const [searchValue, setSearchValue] = React.useState('');
   const [{ ingredients, error, loading }] = useGetIngredients(searchValue);
@@ -33,7 +34,7 @@ export default function Ingredients() {
   const handleSubmitModal = () => {};
 
   function handleButtonClick() {
-    console.log('You clicked me!');
+    history.push(`/party/${id}`);
   }
 
   function handleChange(value) {
