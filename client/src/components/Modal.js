@@ -20,6 +20,7 @@ const Blur = styled.div`
   background: ${(props) => props.theme.secondaryActive};
   opacity: 0.8;
   backdrop-filter: blur(10px);
+  z-index: 1;
 `;
 
 const IngredientHeader = styled.h2`
