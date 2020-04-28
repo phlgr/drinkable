@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
+import Drink from './pages/Drink';
 import Party from './pages/Party';
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route exact path="/party/:id/ingredients">
             <Ingredients />
+          </Route>
+          <Route exact path="/drink/:id">
+            <Drink />
           </Route>
           <Route exact path="/party/:id/">
             <Party />
