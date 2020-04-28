@@ -6,6 +6,7 @@ import PartyContainer from '../components/PartyContainer';
 import useGetParty from '../hooks/useGetParty';
 import Loading from '../components/Loading';
 import Thumbnail from '../components/Thumbnail';
+import SearchInput from '../components/SearchInput';
 
 const ThumbnailContainer = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const ThumbnailContainer = styled.div`
 
 export default function Party() {
   const { id } = useParams();
+  const [searchValue, setSearchValue] = React.useState('');
   const [{ party, error, loading }, doGetParty] = useGetParty(id);
   return (
     <>
@@ -29,6 +31,11 @@ export default function Party() {
           party={party}
           onPartyNameChange={doGetParty}
         >
+          <SearchInput
+            placeholder={'Search drinks'}
+            value={searchValue}
+            onChange={(event) => setSearchValue(event.target.value)}
+          />
           <ThumbnailContainer>
             {Object.entries(party.drinks).map(([key, value]) => (
               <Thumbnail key={value.id} src={value.thumbnail} name={key} />
