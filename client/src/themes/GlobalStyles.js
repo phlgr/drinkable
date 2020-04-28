@@ -16,7 +16,7 @@ export default function GlobalStyles() {
           font-size: 16px;
           margin: 0px;
           background: ${theme.background};
-          height: 100vh;
+          height: 100%;
           width: 100vw;
         }
       `}
