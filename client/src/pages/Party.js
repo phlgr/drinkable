@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import PartyContainer from '../components/PartyContainer';
@@ -14,6 +14,7 @@ const ThumbnailContainer = styled.div`
 `;
 
 export default function Party() {
+  const history = useHistory();
   const { id } = useParams();
   const [{ party, error, loading }, doGetParty] = useGetParty(id);
   return (
@@ -31,7 +32,12 @@ export default function Party() {
         >
           <ThumbnailContainer>
             {Object.entries(party.drinks).map(([key, value]) => (
-              <Thumbnail key={value.id} src={value.thumbnail} name={key} />
+              <Thumbnail
+                key={value.id}
+                src={value.thumbnail}
+                name={key}
+                onClick={() => history.push(`/drink/${value.id}`)}
+              />
             ))}
           </ThumbnailContainer>
         </PartyContainer>
