@@ -48,9 +48,6 @@
     "mongodb": "^3.5.5",
     "node-fetch": "^2.6.0"
   },
-  "nodemonConfig": {
-    "delay": "1000"
-  },
   "cacheDirectories": [
     "client/node_modules",
     "node_modules"
