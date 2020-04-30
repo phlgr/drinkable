@@ -23,24 +23,13 @@ const ThumbnailContainer = styled.div`
   padding: 5px;
   margin: 5px;
   cursor: pointer;
-  &:hover {
-    transition: 0.2s;
-    background: url(${(props) => props.src});
-    background-position: center;
-    background-size: 100%;
-  }
 `;
 
-export default function Thumbnail({ src, name, onClick }) {
-  return (
-    <ThumbnailContainer onClick={onClick} src={src}>
-      {name}
-    </ThumbnailContainer>
-  );
+export default function Thumbnail({ src, name }) {
+  return <ThumbnailContainer src={src}>{name}</ThumbnailContainer>;
 }
 
 Thumbnail.propTypes = {
   src: PropTypes.string,
   name: PropTypes.string,
-  onClick: PropTypes.func,
 };

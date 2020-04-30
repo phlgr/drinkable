@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useParams, useHistory } from 'react-router-dom';
-
-import useGetDrinkDetails from '../hooks/useGetDrinkDetails';
 
 import Header from '../components/Header';
+
 import Arrow from '../assets/return-arrow.svg';
-import Loading from '../components/Loading';
 
 const FullWrapper = styled.div`
   position: fixed;
@@ -58,7 +55,6 @@ const Ingredient = styled.p`
 const InstructionContainer = styled.div`
   padding: 5px;
   flex-basis: 100%;
-  text-align: justify;
 `;
 
 const InstructionHeader = styled.h2`
@@ -66,41 +62,35 @@ const InstructionHeader = styled.h2`
 `;
 
 export default function Drink() {
-  const history = useHistory();
-  const { id } = useParams();
-  const [{ drinkDetails, error, loading }] = useGetDrinkDetails(id);
   return (
     <FullWrapper>
       <Header />
-      {error && <p>There was an error loading this drink! Try reloading!</p>}
-      {loading && <Loading />}
-      {drinkDetails && (
-        <>
-          <HeaderContainer>
-            <BackButton src={Arrow} onClick={history.goBack} />
-            <DrinkName>{drinkDetails.name}</DrinkName>
-          </HeaderContainer>
-          <ContentContainer>
-            <CocktailThumbnail src={drinkDetails.image} />
-            <IngredientsContainer>
-              <IngredientsHeader>Ingredients:</IngredientsHeader>
-              {drinkDetails.ingredients.map((ingredient, i) => (
-                <Ingredient key={i}>
-                  {ingredient.name} {ingredient.amount}
-                </Ingredient>
-              ))}
-            </IngredientsContainer>
-          </ContentContainer>
-          <InstructionContainer>
-            <InstructionHeader>Instructions:</InstructionHeader>
-            <p>
-              {drinkDetails.instructionsDE
-                ? drinkDetails.instructionsDE
-                : drinkDetails.instructions}
-            </p>
-          </InstructionContainer>
-        </>
-      )}
+      <HeaderContainer>
+        <BackButton src={Arrow} />
+        <DrinkName>3-Mile Long Island Ice Tea</DrinkName>
+      </HeaderContainer>
+      <ContentContainer>
+        <CocktailThumbnail
+          src={
+            'https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg'
+          }
+        />
+        <IngredientsContainer>
+          <IngredientsHeader>Ingredients:</IngredientsHeader>
+          <Ingredient>Cola</Ingredient>
+          <Ingredient>Cola</Ingredient>
+          <Ingredient>Cola</Ingredient>
+          <Ingredient>Cola</Ingredient>
+        </IngredientsContainer>
+      </ContentContainer>
+      <InstructionContainer>
+        <InstructionHeader>Instructions:</InstructionHeader>
+        <p>
+          Muddle mint leaves with sugar and lime juice. Add a splash of soda
+          water and fill the glass with cracked ice. Pour the rum and top with
+          soda water. Garnish and serve with straw.
+        </p>
+      </InstructionContainer>
     </FullWrapper>
   );
 }

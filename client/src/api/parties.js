@@ -40,20 +40,6 @@ function patchParty(partyId, content) {
   });
 }
 
-function getPartyDrinks(partyId, searchValue) {
-  return fetch(
-    `/api/parties/${partyId}/drinks${searchValue ? `?q=${searchValue}` : ''}`
-  )
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error(response.statusText);
-      }
-      return response;
-    })
-    .then((response) => response.json());
-}
-
 exports.postParty = postParty;
 exports.getParty = getParty;
 exports.patchParty = patchParty;
-exports.getPartyDrinks = getPartyDrinks;
