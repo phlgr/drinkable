@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import useGetParty from '../hooks/useGetParty';
@@ -18,6 +18,7 @@ const ThumbnailContainer = styled.div`
 `;
 
 export default function Party() {
+  const history = useHistory();
   const { id } = useParams();
   const [searchValue, setSearchValue] = React.useState('');
   const [{ party, error, loading }, doGetParty] = useGetParty(id);
@@ -47,7 +48,12 @@ export default function Party() {
           {drinks && !loadingDrinks && (
             <ThumbnailContainer>
               {Object.entries(drinks).map(([key, value]) => (
-                <Thumbnail key={value.id} src={value.thumbnail} name={key} />
+                <Thumbnail
+                  key={value.id}
+                  src={value.thumbnail}
+                  name={key}
+                  onClick={() => history.push(`/drink/${value.id}`)}
+                />
               ))}
             </ThumbnailContainer>
           )}
