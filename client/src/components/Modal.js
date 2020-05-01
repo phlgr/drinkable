@@ -99,7 +99,12 @@ const SVG = styled.img`
   cursor: pointer;
 `;
 
-export default function Modal({ ingredient, toggleModal, onIngredientChange }) {
+export default function Modal({
+  ingredient,
+  toggleModal,
+  onIngredientChange,
+  selected,
+}) {
   const { id } = useParams();
   const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
@@ -191,21 +196,37 @@ export default function Modal({ ingredient, toggleModal, onIngredientChange }) {
             </Button>
           </ModalAmounts>
           <ModalFooter>
-            <Button
-              onClick={handleRemoveButtonClick}
-              full
-              background={'primary'}
-            >
-              Remove
-            </Button>
-            <Button
-              onClick={handleAddButtonClick}
-              full
-              background={'secondary'}
-            >
-              {!loading && 'Add'}
-              {loading && <Loading white />}
-            </Button>
+            {selected && (
+              <>
+                <Button
+                  onClick={handleRemoveButtonClick}
+                  full
+                  background={'primary'}
+                >
+                  Remove
+                </Button>
+                <Button
+                  onClick={handleAddButtonClick}
+                  full
+                  background={'secondary'}
+                >
+                  {!loading && 'Update'}
+                  {loading && <Loading white />}
+                </Button>
+              </>
+            )}
+            {selected && (
+              <>
+                <Button
+                  onClick={handleAddButtonClick}
+                  full
+                  background={'secondary'}
+                >
+                  {!loading && 'Add'}
+                  {loading && <Loading white />}
+                </Button>
+              </>
+            )}
           </ModalFooter>
         </ModalArea>
       </ModalContainer>
@@ -217,4 +238,5 @@ Modal.propTypes = {
   ingredient: PropTypes.string.isRequired,
   toggleModal: PropTypes.func,
   onIngredientChange: PropTypes.func,
+  selected: PropTypes.bool,
 };
