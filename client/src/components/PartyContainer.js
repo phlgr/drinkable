@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Header from './Header.js';
 import PartyName from './PartyName';
 import Button from './Button';
+import ShareButton from './ShareButton.js';
 
 const BorderContainer = styled.div`
   position: fixed;
@@ -17,6 +18,12 @@ const BorderContainer = styled.div`
 
 const HeaderContainer = styled.div`
   height: auto;
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ContentContainer = styled.div`
@@ -39,7 +46,10 @@ export default function PartyContainer({
       <BorderContainer>
         <HeaderContainer>
           <Header />
-          <PartyName name={party.name} onChange={onPartyNameChange} />
+          <HeaderRow>
+            <PartyName name={party.name} onChange={onPartyNameChange} />
+            <ShareButton />
+          </HeaderRow>
         </HeaderContainer>
         <ContentContainer {...props}></ContentContainer>
         <FooterContainer>
