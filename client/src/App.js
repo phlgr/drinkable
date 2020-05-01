@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
 import Drink from './pages/Drink';
 import Party from './pages/Party';
+import PartyIngredients from './pages/PartyIngredients';
 
 function App() {
   const [theme] = React.useState(light);
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/party/:id/">
             <Party />
+          </Route>
+          <Route exact path="/party/:id/overview">
+            <PartyIngredients />
           </Route>
         </Switch>
       </ThemeProvider>

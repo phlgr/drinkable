@@ -33,7 +33,7 @@ export default function Party() {
         <PartyContainer
           button={{
             label: 'Manage Ingredients',
-            onClick: () => console.log('Clicked me!'),
+            onClick: () => history.push(`/party/${id}/overview`),
           }}
           party={party}
           onPartyNameChange={doGetParty}
