@@ -215,7 +215,7 @@ export default function Modal({
                 </Button>
               </>
             )}
-            {selected && (
+            {!selected && (
               <>
                 <Button
                   onClick={handleAddButtonClick}

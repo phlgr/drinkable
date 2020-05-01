@@ -18,12 +18,17 @@ export default function Ingredients() {
   const [modal, setModal] = React.useState(false);
   const [currentIngredient, setCurrentIngredient] = React.useState('');
   const [
+    currentIngredientSelected,
+    setCurrentIngredientSelected,
+  ] = React.useState(false);
+  const [
     { party, error: partyError, loading: partyLoading },
     doGetParty,
   ] = useGetParty(id);
 
-  const handleIngredientSelect = (name) => {
+  const handleIngredientSelect = (name, selected) => {
     setCurrentIngredient(name);
+    setCurrentIngredientSelected(selected);
     setModal(true);
   };
 
@@ -51,6 +56,7 @@ export default function Ingredients() {
         <>
           {modal && (
             <Modal
+              selected={currentIngredientSelected}
               toggleModal={toggleModal}
               onSubmit={handleSubmitModal}
               ingredient={currentIngredient}
@@ -77,7 +83,12 @@ export default function Ingredients() {
               ingredients.map((ingredient) => (
                 <Ingredient
                   selected={partyIngredientNames.includes(ingredient.name)}
-                  onSelect={() => handleIngredientSelect(ingredient.name)}
+                  onSelect={() =>
+                    handleIngredientSelect(
+                      ingredient.name,
+                      partyIngredientNames.includes(ingredient.name)
+                    )
+                  }
                   key={ingredient.name}
                 >
                   {ingredient.name}
