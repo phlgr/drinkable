@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import useGetParty from '../hooks/useGetParty';
 
@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 import ListItem from '../components/ListItem';
 
 export default function PartyIngredients() {
+  const history = useHistory();
   const { id } = useParams();
   const [{ party, error, loading }, doGetParty] = useGetParty(id);
   return (
@@ -18,7 +19,7 @@ export default function PartyIngredients() {
         <PartyContainer
           button={{
             label: 'Save ingredients',
-            onClick: () => console.log('Clicked me!'),
+            onClick: () => history.push(`/party/${id}`),
           }}
           party={party}
           onPartyNameChange={doGetParty}
