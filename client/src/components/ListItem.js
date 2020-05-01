@@ -37,13 +37,16 @@ const EditIcon = styled.img`
   cursor: pointer;
 `;
 
-export default function ListItem({ ingredient, amount }) {
+export default function ListItem({ ingredient, amount, onEditButtonClick }) {
   return (
     <Item>
       <Name>{ingredient}</Name>
 
       <Amount>{amount}</Amount>
-      <EditIcon src={editIcon}></EditIcon>
+      <EditIcon
+        onClick={() => onEditButtonClick(ingredient)}
+        src={editIcon}
+      ></EditIcon>
     </Item>
   );
 }
@@ -51,4 +54,5 @@ export default function ListItem({ ingredient, amount }) {
 ListItem.propTypes = {
   ingredient: PropTypes.string,
   amount: PropTypes.string,
+  onEditButtonClick: PropTypes.func,
 };
