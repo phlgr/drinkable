@@ -42,7 +42,7 @@ export default function ListItem({ ingredient, amount }) {
     <Item>
       <Name>{ingredient}</Name>
 
-      <Amount>{amount}l</Amount>
+      <Amount>{amount}</Amount>
       <EditIcon src={editIcon}></EditIcon>
     </Item>
   );
@@ -50,5 +50,5 @@ export default function ListItem({ ingredient, amount }) {
 
 ListItem.propTypes = {
   ingredient: PropTypes.string,
-  amount: PropTypes.number,
+  amount: PropTypes.string,
 };
