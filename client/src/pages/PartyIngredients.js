@@ -34,6 +34,7 @@ export default function PartyIngredients() {
         <>
           {modal && (
             <Modal
+              selected={true}
               toggleModal={toggleModal}
               onSubmit={handleSubmitModal}
               ingredient={currentIngredient}
