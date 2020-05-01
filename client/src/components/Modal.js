@@ -10,6 +10,7 @@ import plusSVG from '../assets/plus-circle.svg';
 import Button from '../components/Button';
 import usePatchParty from '../hooks/usePatchParty';
 import Loading from './Loading';
+import useDeletePartyIngredient from '../hooks/useDeletePartyIngredient';
 
 const Blur = styled.div`
   position: absolute;
@@ -108,20 +109,25 @@ export default function Modal({
   const { id } = useParams();
   const [content, setContent] = React.useState();
   const [amount, setAmount] = React.useState('3l');
-  const [{ response, loading }, doPatch] = usePatchParty(id, content);
+  const [deleteIngredient, setDeleteIngredient] = React.useState(false);
+  const [patchIngredient, setPatchIngredient] = React.useState(false);
+  const [{ loading: deleteLoading }, doDelete] = useDeletePartyIngredient(
+    id,
+    content
+  );
+  const [{ loading }, doPatch] = usePatchParty(id, content);
 
   React.useEffect(() => {
     if (content) {
-      doPatch();
+      doDelete().then(toggleModal).then(onIngredientChange);
     }
-  }, [content]);
+  }, [deleteIngredient]);
 
   React.useEffect(() => {
-    if (response) {
-      toggleModal();
-      onIngredientChange();
+    if (content) {
+      doPatch().then(toggleModal).then(onIngredientChange);
     }
-  }, [response]);
+  }, [patchIngredient]);
 
   function extractNumber(value) {
     return parseFloat(value);
@@ -154,10 +160,14 @@ export default function Modal({
     setContent({
       [`ingredients.${ingredient}`]: { quantity: amount },
     });
+    setPatchIngredient(true);
   }
 
   function handleRemoveButtonClick() {
-    return;
+    setContent({
+      [`ingredients.${ingredient}`]: { quantity: amount },
+    });
+    setDeleteIngredient(true);
   }
 
   return (
@@ -203,7 +213,8 @@ export default function Modal({
                   full
                   background={'primary'}
                 >
-                  Remove
+                  {!deleteLoading && 'Delete'}
+                  {deleteLoading && <Loading white />}
                 </Button>
                 <Button
                   onClick={handleAddButtonClick}

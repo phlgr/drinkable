@@ -53,7 +53,18 @@ function getPartyDrinks(partyId, searchValue) {
     .then((response) => response.json());
 }
 
+function deletePartyIngredient(partyId, ingredient) {
+  return fetch(`/api/parties/${partyId}/ingredients`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(ingredient),
+  });
+}
+
 exports.postParty = postParty;
 exports.getParty = getParty;
 exports.patchParty = patchParty;
 exports.getPartyDrinks = getPartyDrinks;
+exports.deletePartyIngredient = deletePartyIngredient;
