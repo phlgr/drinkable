@@ -28,7 +28,17 @@ export default function ShareButton() {
   }
 
   async function handleClick() {
-    copyToClipboard(pasteURL);
+    if (navigator.share) {
+      navigator
+        .share({
+          title: document.title,
+          url: pasteURL,
+        })
+        .then(() => console.log('Shared!'))
+        .catch(console.error);
+    } else {
+      copyToClipboard(pasteURL);
+    }
   }
 
   return <Button onClick={handleClick}>Share</Button>;
