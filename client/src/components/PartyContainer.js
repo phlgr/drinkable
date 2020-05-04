@@ -22,7 +22,8 @@ const HeaderContainer = styled.div`
 
 const HeaderRow = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: flex-end;
   align-items: center;
 `;
 

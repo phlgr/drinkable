@@ -3,7 +3,10 @@ import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
 const Button = styled.div`
+  margin-left: auto;
+  display: inline-block;
   background: ${(props) => props.theme.secondaryActive};
+  margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
   color: white;
@@ -13,6 +16,7 @@ const Button = styled.div`
 export default function ShareButton() {
   const { id } = useParams();
   const [pasteURL, setPasteURL] = React.useState('');
+  const [notification, setNotification] = React.useState(false);
 
   React.useEffect(() => {
     setPasteURL(`${window.location.origin}/party/${id}`);
@@ -38,8 +42,17 @@ export default function ShareButton() {
         .catch(console.error);
     } else {
       copyToClipboard(pasteURL);
+      setNotification(true);
+      setTimeout(() => setNotification(false), 2000);
     }
   }
 
-  return <Button onClick={handleClick}>Share</Button>;
+  return (
+    <>
+      <Button onClick={handleClick}>
+        {!notification && 'Share'}
+        {notification && 'Link copied!'}
+      </Button>
+    </>
+  );
 }

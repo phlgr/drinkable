@@ -10,6 +10,7 @@ import Edit from '../assets/pencil-icon.svg';
 import Save from '../assets/checkmark.svg';
 
 const PartyNameContainer = styled.div`
+  max-width: 100%;
   display: flex;
   align-items: center;
   color: ${(props) => props.theme.secondaryActive};
@@ -23,9 +24,14 @@ const EditButton = styled.img`
   padding: 10px;
   cursor: pointer;
 `;
-const PartyNameInput = styled.input`
-  color: ${(props) => props.theme.secondaryActive};
+
+const EditContainer = styled.div`
+  display: flex;
   max-width: 60%;
+`;
+const PartyNameInput = styled.input`
+  max-width: 100%;
+  color: ${(props) => props.theme.secondaryActive};
   background: none;
   font-family: Comfortaa;
   font-size: 2.3rem;
@@ -68,7 +74,7 @@ export default function PartyName(props) {
           </>
         )}
         {edit && (
-          <>
+          <EditContainer>
             <PartyNameInput
               value={partyName}
               onChange={(event) => setPartyName(event.target.value)}
@@ -77,7 +83,7 @@ export default function PartyName(props) {
             {!loading && <EditButton onClick={handleSaveClick} src={Save} />}
             {loading && <Loading />}
             {error && 'Error'}
-          </>
+          </EditContainer>
         )}
       </PartyNameContainer>
     </>
