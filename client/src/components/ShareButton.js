@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
 const Button = styled.div`
-  margin-left: auto;
   display: inline-block;
   background: ${(props) => props.theme.secondaryActive};
   margin: 10px 0;
+  margin-left: auto;
   padding: 10px;
   border-radius: 5px;
   color: white;
