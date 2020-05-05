@@ -3,7 +3,6 @@ const path = require('path');
 require('dotenv').config();
 
 const { initDatabase } = require('./lib/database');
-const { setIngredientsDB } = require('./lib/models/ingredients');
 
 const ingredients = require('./lib/routes/ingredients');
 const drinks = require('./lib/routes/drinks');
@@ -28,8 +27,6 @@ app.get('*', (request, response) => {
 initDatabase(process.env.MONGO_URL, process.env.MONGO_DB_NAME).then(
   async () => {
     console.log(`Database ${process.env.MONGO_DB_NAME} is ready`);
-
-    await setIngredientsDB();
 
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
