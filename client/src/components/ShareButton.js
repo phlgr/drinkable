@@ -33,13 +33,10 @@ export default function ShareButton() {
 
   async function handleClick() {
     if (navigator.share) {
-      navigator
-        .share({
-          title: document.title,
-          url: pasteURL,
-        })
-        .then(() => console.log('Shared!'))
-        .catch(console.error);
+      navigator.share({
+        title: document.title,
+        url: pasteURL,
+      });
     } else {
       copyToClipboard(pasteURL);
       setNotification(true);
