@@ -22,6 +22,7 @@ const Item = styled.div`
 `;
 
 const Name = styled.h2`
+  text-transform: capitalize;
   font-size: 1.8rem;
   flex-grow: 1;
 `;

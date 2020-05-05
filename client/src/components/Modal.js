@@ -29,6 +29,7 @@ const IngredientHeader = styled.h2`
   font-weight: 400;
   font-size: 2.4rem;
   margin: 0;
+  text-transform: capitalize;
 `;
 
 const ModalContainer = styled.div`
