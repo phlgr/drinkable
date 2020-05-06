@@ -60,7 +60,6 @@ const LoadingAnimation = styled.div`
   ${(props) =>
     props.fullscreen
       ? `z-index: 2;
-  background: white;
   `
       : ''}
 `;
