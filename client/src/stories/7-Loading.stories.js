@@ -6,4 +6,6 @@ export default {
   component: Loading,
 };
 
-export const LoadingIcon = () => <Loading />;
+export const Standard = () => <Loading />;
+export const White = () => <Loading white />;
+export const Fullscreen = () => <Loading fullscreen />;
