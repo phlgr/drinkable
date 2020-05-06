@@ -73,6 +73,8 @@ const LoadingWrapper = styled.div`
   ${(props) =>
     props.fullscreen
       ? `position: absolute;
+      top:0;
+      right:0;
   width: 100vw;
   height: 90vh;
   display: flex;
