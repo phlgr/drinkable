@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Logo from '../assets/drinkable-logo.svg';
+import { useHistory } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -14,8 +15,9 @@ const Heading = styled.h1`
 `;
 
 export default function Header() {
+  const history = useHistory();
   return (
-    <HeaderContainer>
+    <HeaderContainer onClick={() => history.push('/')}>
       <img src={Logo} alt="Logo"></img>
       <Heading>drinkable.</Heading>
     </HeaderContainer>
