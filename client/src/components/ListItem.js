@@ -10,7 +10,7 @@ const Item = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid ${(props) => props.theme.primary};
-  width: 90vw;
+  width: 100%;
   color: ${(props) => props.theme.secondaryActive};
   padding: 5px 10px 5px 5px;
   > * {

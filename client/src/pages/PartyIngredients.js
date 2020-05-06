@@ -11,8 +11,7 @@ import ListItem from '../components/ListItem';
 import Modal from '../components/Modal';
 
 const AddButton = styled.img`
-  padding: 20px;
-  transform: scale(1.5);
+  margin: 20px;
 `;
 
 export default function PartyIngredients() {
