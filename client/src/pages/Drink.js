@@ -70,37 +70,40 @@ export default function Drink() {
   const { id } = useParams();
   const [{ drinkDetails, error, loading }] = useGetDrinkDetails(id);
   return (
-    <FullWrapper>
-      <Header />
-      {error && <p>There was an error loading this drink! Try reloading!</p>}
-      {loading && <Loading />}
-      {drinkDetails && (
-        <>
-          <HeaderContainer>
-            <BackButton src={Arrow} onClick={history.goBack} />
-            <DrinkName>{drinkDetails.name}</DrinkName>
-          </HeaderContainer>
-          <ContentContainer>
-            <CocktailThumbnail src={drinkDetails.image} />
-            <IngredientsContainer>
-              <IngredientsHeader>Ingredients:</IngredientsHeader>
-              {drinkDetails.ingredients.map((ingredient, i) => (
-                <Ingredient key={i}>
-                  {ingredient.name} {ingredient.amount}
-                </Ingredient>
-              ))}
-            </IngredientsContainer>
-          </ContentContainer>
-          <InstructionContainer>
-            <InstructionHeader>Instructions:</InstructionHeader>
-            <p>
-              {drinkDetails.instructionsDE
-                ? drinkDetails.instructionsDE
-                : drinkDetails.instructions}
-            </p>
-          </InstructionContainer>
-        </>
-      )}
-    </FullWrapper>
+    <>
+      <FullWrapper>
+        <Header />
+        {loading && <Loading fullscreen />}
+        {error && <p>There was an error loading this drink! Try reloading!</p>}
+
+        {drinkDetails && (
+          <>
+            <HeaderContainer>
+              <BackButton src={Arrow} onClick={history.goBack} />
+              <DrinkName>{drinkDetails.name}</DrinkName>
+            </HeaderContainer>
+            <ContentContainer>
+              <CocktailThumbnail src={drinkDetails.image} />
+              <IngredientsContainer>
+                <IngredientsHeader>Ingredients:</IngredientsHeader>
+                {drinkDetails.ingredients.map((ingredient, i) => (
+                  <Ingredient key={i}>
+                    {ingredient.name} {ingredient.amount}
+                  </Ingredient>
+                ))}
+              </IngredientsContainer>
+            </ContentContainer>
+            <InstructionContainer>
+              <InstructionHeader>Instructions:</InstructionHeader>
+              <p>
+                {drinkDetails.instructionsDE
+                  ? drinkDetails.instructionsDE
+                  : drinkDetails.instructions}
+              </p>
+            </InstructionContainer>
+          </>
+        )}
+      </FullWrapper>
+    </>
   );
 }

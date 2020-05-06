@@ -50,7 +50,7 @@ export default function Ingredients() {
 
   return (
     <>
-      {partyLoading && <Loading />}
+      {partyLoading && <Loading fullscreen />}
       {partyError && <p>No party found :(</p>}
       {party && (
         <>

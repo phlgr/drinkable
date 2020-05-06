@@ -1,5 +1,7 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const LoadingAnimation = styled.div`
   display: inline-block;
@@ -56,6 +58,18 @@ const LoadingAnimation = styled.div`
       transform: translate(24px, 0);
     }
   }
+  ${(props) => (props.fullscreen ? 'z-index: 2;' : '')}
+`;
+
+const fullscreen = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LoadingWrapper = styled.div`
@@ -63,11 +77,25 @@ const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${(props) => (props.fullscreen ? fullscreen : '')}
+`;
+
+const Blur = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background: ${(props) => props.theme.background};
+  opacity: 0.8;
+  backdrop-filter: blur(10px);
+  z-index: 1;
 `;
 
 export default function Loading(props) {
   return (
-    <LoadingWrapper>
+    <LoadingWrapper {...props}>
+      {props.fullscreen && <Blur />}
       <LoadingAnimation {...props}>
         <div></div>
         <div></div>
@@ -77,3 +105,7 @@ export default function Loading(props) {
     </LoadingWrapper>
   );
 }
+
+Loading.propTypes = {
+  fullscreen: PropTypes.any,
+};
