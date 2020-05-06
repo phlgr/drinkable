@@ -28,7 +28,7 @@ export default function Party() {
   return (
     <>
       {error && <p>No Party found :(</p>}
-      {loading && <Loading />}
+      {loading && <Loading fullscreen />}
       {!loading && party && (
         <PartyContainer
           button={{
