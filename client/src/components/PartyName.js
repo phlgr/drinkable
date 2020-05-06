@@ -28,6 +28,9 @@ const EditButton = styled.img`
 const EditContainer = styled.div`
   display: flex;
   max-width: 60%;
+  @media (min-width: 1000px) {
+    max-width: 100%;
+  }
 `;
 const PartyNameInput = styled.input`
   max-width: 100%;
