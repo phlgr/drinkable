@@ -14,6 +14,7 @@ const IngredientSelector = styled.button`
   outline: none;
   margin: 2px;
   flex-grow: 1;
+  text-transform: capitalize;
   ${(props) =>
     props.selected
       ? `
