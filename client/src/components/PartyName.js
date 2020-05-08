@@ -10,7 +10,7 @@ import Edit from '../assets/pencil-icon.svg';
 import Save from '../assets/checkmark.svg';
 
 const PartyNameContainer = styled.div`
-  max-width: 100%;
+  max-width: 75%;
   display: flex;
   align-items: center;
   color: ${(props) => props.theme.secondaryActive};
@@ -27,13 +27,13 @@ const EditButton = styled.img`
 
 const EditContainer = styled.div`
   display: flex;
-  max-width: 60%;
+  max-width: 90%;
   @media (min-width: 1000px) {
     max-width: 100%;
   }
 `;
 const PartyNameInput = styled.input`
-  max-width: 100%;
+  max-width: 80%;
   color: ${(props) => props.theme.secondaryActive};
   background: none;
   font-family: Comfortaa;
