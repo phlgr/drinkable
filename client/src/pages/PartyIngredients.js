@@ -36,7 +36,7 @@ export default function PartyIngredients() {
     <>
       {error && <p>No Party found :(</p>}
       {loading && <Loading fullscreen />}
-      {!loading && party && (
+      {party && (
         <>
           {modal && (
             <Modal

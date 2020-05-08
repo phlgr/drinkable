@@ -29,7 +29,7 @@ export default function Party() {
     <>
       {error && <p>No Party found :(</p>}
       {loading && <Loading fullscreen />}
-      {!loading && party && (
+      {party && (
         <PartyContainer
           button={{
             label: 'Manage Ingredients',
