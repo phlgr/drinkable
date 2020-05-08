@@ -83,35 +83,37 @@ export default function Home() {
     doPost();
   }
   return (
-    <BorderContainer>
-      <PrimaryContainer>
-        <Header />
-        <InfoText>
-          Organise the drinks of your next Party with drinkable!
-        </InfoText>
-        <Button background="primary" onClick={partyButtonHandleCLick}>
-          {!loading && !error && 'Plan a Party!'}
-          {loading && <Loading white />}
-          {error && 'Try again!'}
-        </Button>
-      </PrimaryContainer>
-      <SecondaryContainer>
-        <InstructionContainer>
-          <h2>How to use:</h2>
-          <ol>
-            <li>Add Ingredients to your party</li>
-            <li>Name your Party</li>
-            <li>Share your Party with friends</li>
-            <li>Have Fun!</li>
-          </ol>
-        </InstructionContainer>
-        <Button background="secondary" onClick={partyButtonHandleCLick}>
-          {!loading && !error && 'Start Planning!'}
-          {loading && <Loading white />}
-          {error && 'Try again!'}
-        </Button>
-      </SecondaryContainer>
-      <Footer>Every Button leads towards the party!</Footer>
-    </BorderContainer>
+    <>
+      {loading && <Loading fullscreen />}
+      <BorderContainer>
+        <PrimaryContainer>
+          <Header />
+          <InfoText>
+            Organise the drinks of your next Party with drinkable!
+          </InfoText>
+          <Button background="primary" onClick={partyButtonHandleCLick}>
+            {!loading && !error && 'Plan a Party!'}
+
+            {error && 'Try again!'}
+          </Button>
+        </PrimaryContainer>
+        <SecondaryContainer>
+          <InstructionContainer>
+            <h2>How to use:</h2>
+            <ol>
+              <li>Add Ingredients to your party</li>
+              <li>Name your Party</li>
+              <li>Share your Party with friends</li>
+              <li>Have Fun!</li>
+            </ol>
+          </InstructionContainer>
+          <Button background="secondary" onClick={partyButtonHandleCLick}>
+            {!loading && !error && 'Start Planning!'}
+            {error && 'Try again!'}
+          </Button>
+        </SecondaryContainer>
+        <Footer>Every Button leads towards the party!</Footer>
+      </BorderContainer>
+    </>
   );
 }
