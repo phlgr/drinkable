@@ -77,6 +77,7 @@ export default function Home() {
     if (partyId) {
       history.push(`/party/${partyId}/ingredients`);
     }
+    // eslint-disable-next-line
   }, [partyId]);
 
   function partyButtonHandleCLick() {

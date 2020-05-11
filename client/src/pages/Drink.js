@@ -95,11 +95,7 @@ export default function Drink() {
             </ContentContainer>
             <InstructionContainer>
               <InstructionHeader>Instructions:</InstructionHeader>
-              <p>
-                {drinkDetails.instructionsDE
-                  ? drinkDetails.instructionsDE
-                  : drinkDetails.instructions}
-              </p>
+              <p>{drinkDetails.instructions}</p>
             </InstructionContainer>
           </>
         )}

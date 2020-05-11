@@ -18,6 +18,7 @@ export default function useGetParty(partyId) {
       setLoading(false);
     }
   }
+
   React.useEffect(() => {
     doGet();
   }, [partyId]);

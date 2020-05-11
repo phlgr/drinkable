@@ -6,18 +6,17 @@ export default function useGetDrinkDetails(id) {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
-  async function doGetDrinkDetails() {
-    try {
-      const drinkDetails = await getDrinkDetails(id);
-      setDrinkDetails(drinkDetails);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   React.useEffect(() => {
+    async function doGetDrinkDetails() {
+      try {
+        const drinkDetails = await getDrinkDetails(id);
+        setDrinkDetails(drinkDetails);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
     doGetDrinkDetails();
   }, [id]);
 

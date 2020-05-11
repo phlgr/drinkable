@@ -119,15 +119,17 @@ export default function Modal({
   const [{ loading }, doPatch] = usePatchParty(id, content);
 
   React.useEffect(() => {
-    if (content) {
-      doDelete().then(toggleModal).then(onIngredientChange);
+    if (deleteIngredient) {
+      doDelete().then(onIngredientChange).then(toggleModal);
     }
+    // eslint-disable-next-line
   }, [deleteIngredient]);
 
   React.useEffect(() => {
-    if (content) {
-      doPatch().then(toggleModal).then(onIngredientChange);
+    if (patchIngredient) {
+      doPatch().then(onIngredientChange).then(toggleModal);
     }
+    // eslint-disable-next-line
   }, [patchIngredient]);
 
   function extractNumber(value) {

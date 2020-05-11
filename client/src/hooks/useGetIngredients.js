@@ -6,18 +6,18 @@ export default function useGetIngredients(searchValue) {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
-  async function doGetIngredients() {
-    try {
-      const filteredIngredients = await getIngredients(searchValue);
-      setIngredients(filteredIngredients);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   React.useEffect(() => {
+    async function doGetIngredients() {
+      try {
+        const filteredIngredients = await getIngredients(searchValue);
+        setIngredients(filteredIngredients);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     doGetIngredients();
   }, [searchValue]);
 
