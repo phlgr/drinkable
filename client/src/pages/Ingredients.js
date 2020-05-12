@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import PartyContainer from '../components/PartyContainer';
@@ -32,9 +32,9 @@ export default function Ingredients() {
     setModal(true);
   };
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setModal(!modal);
-  };
+  }, [modal]);
 
   const handleSubmitModal = () => {};
 

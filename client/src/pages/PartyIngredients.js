@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 
@@ -26,9 +26,9 @@ export default function PartyIngredients() {
     toggleModal();
   };
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setModal(!modal);
-  };
+  }, [modal]);
 
   const handleSubmitModal = () => {};
 

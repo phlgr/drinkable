@@ -122,15 +122,13 @@ export default function Modal({
     if (deleteIngredient) {
       doDelete().then(onIngredientChange).then(toggleModal);
     }
-    // eslint-disable-next-line
-  }, [deleteIngredient]);
+  }, [deleteIngredient, doDelete, onIngredientChange, toggleModal]);
 
   React.useEffect(() => {
     if (patchIngredient) {
       doPatch().then(onIngredientChange).then(toggleModal);
     }
-    // eslint-disable-next-line
-  }, [patchIngredient]);
+  }, [patchIngredient, doPatch, onIngredientChange, toggleModal]);
 
   function extractNumber(value) {
     return parseFloat(value);

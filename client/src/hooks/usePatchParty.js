@@ -1,23 +1,26 @@
-import React from 'react';
+import { useCallback, useState } from 'react';
 import { patchParty } from '../api/parties';
 
 export default function usePatchParty(partyId, content) {
-  const [response, setResponse] = React.useState(null);
-  const [error, setError] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  async function doPatch() {
-    try {
-      setLoading(true);
-      const response = await patchParty(partyId, content);
-      setResponse(response);
-    } catch (error) {
-      console.error(error);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const doPatch = useCallback(
+    async function doPatch() {
+      try {
+        setLoading(true);
+        const response = await patchParty(partyId, content);
+        setResponse(response);
+      } catch (error) {
+        console.error(error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [content, partyId]
+  );
 
   return [{ response, error, loading }, doPatch];
 }

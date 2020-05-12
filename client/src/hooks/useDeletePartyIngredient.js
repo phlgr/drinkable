@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { deletePartyIngredient } from '../api/parties';
 
 export default function useDeletePartyIngredient(partyId, ingredient) {
@@ -6,7 +6,7 @@ export default function useDeletePartyIngredient(partyId, ingredient) {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  async function doDelete() {
+  const doDelete = useCallback(async () => {
     try {
       setLoading(true);
       const response = await deletePartyIngredient(partyId, ingredient);
@@ -17,7 +17,7 @@ export default function useDeletePartyIngredient(partyId, ingredient) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [partyId, ingredient]);
 
   return [{ response, error, loading }, doDelete];
 }
