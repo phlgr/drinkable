@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { getParty } from '../api/parties';
 
 export default function useGetParty(partyId) {
@@ -6,7 +6,7 @@ export default function useGetParty(partyId) {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  async function doGet() {
+  const doGet = useCallback(async () => {
     try {
       setLoading(true);
       const party = await getParty(partyId);
@@ -17,11 +17,11 @@ export default function useGetParty(partyId) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [partyId]);
 
   React.useEffect(() => {
     doGet();
-  }, [partyId]);
+  }, [partyId, doGet]);
 
   return [{ party, error, loading }, doGet];
 }
