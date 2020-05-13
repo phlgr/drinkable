@@ -77,7 +77,7 @@ export default function Home() {
     if (partyId) {
       history.push(`/party/${partyId}/ingredients`);
     }
-  }, [partyId]);
+  }, [partyId, history]);
 
   function partyButtonHandleCLick() {
     doPost();

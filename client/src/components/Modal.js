@@ -119,16 +119,16 @@ export default function Modal({
   const [{ loading }, doPatch] = usePatchParty(id, content);
 
   React.useEffect(() => {
-    if (content) {
-      doDelete().then(toggleModal).then(onIngredientChange);
+    if (deleteIngredient) {
+      doDelete().then(onIngredientChange).then(toggleModal);
     }
-  }, [deleteIngredient]);
+  }, [deleteIngredient, doDelete, onIngredientChange, toggleModal]);
 
   React.useEffect(() => {
-    if (content) {
-      doPatch().then(toggleModal).then(onIngredientChange);
+    if (patchIngredient) {
+      doPatch().then(onIngredientChange).then(toggleModal);
     }
-  }, [patchIngredient]);
+  }, [patchIngredient, doPatch, onIngredientChange, toggleModal]);
 
   function extractNumber(value) {
     return parseFloat(value);

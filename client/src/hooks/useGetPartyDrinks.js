@@ -6,20 +6,19 @@ export default function useGetPartyDrinks(id, searchValue) {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
-  async function doGetPartyDrinks() {
-    try {
-      const filteredDrinks = await getPartyDrinks(id, searchValue);
-      setDrinks(filteredDrinks);
-    } catch (e) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   React.useEffect(() => {
+    async function doGetPartyDrinks() {
+      try {
+        const filteredDrinks = await getPartyDrinks(id, searchValue);
+        setDrinks(filteredDrinks);
+      } catch (e) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
     doGetPartyDrinks();
-  }, [searchValue]);
+  }, [searchValue, id]);
 
   return [{ drinks, error, loading }];
 }
