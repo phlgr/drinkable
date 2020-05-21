@@ -9,6 +9,7 @@ import PartyContainer from '../components/PartyContainer';
 import Loading from '../components/Loading';
 import Thumbnail from '../components/Thumbnail';
 import SearchInput from '../components/SearchInput';
+import ErrorMessage from '../components/ErrorMessage';
 
 const ThumbnailContainer = styled.div`
   width: 100%;
@@ -46,16 +47,30 @@ export default function Party() {
           {errorDrinks && <p>Could not load drinks :(</p>}
           {loadingDrinks && <Loading />}
           {drinks && !loadingDrinks && (
-            <ThumbnailContainer>
-              {Object.entries(drinks).map(([key, value]) => (
-                <Thumbnail
-                  key={value.id}
-                  src={value.thumbnail}
-                  name={key}
-                  onClick={() => history.push(`/drink/${value.id}`)}
-                />
-              ))}
-            </ThumbnailContainer>
+            <>
+              <ThumbnailContainer>
+                {Object.keys(drinks).length === 0 ? (
+                  <>
+                    <ErrorMessage
+                      message={
+                        'We could not find any drinks. Try adding more ingredients :)'
+                      }
+                      btntext={'Add Ingredients'}
+                      link={''}
+                    />
+                  </>
+                ) : (
+                  Object.entries(drinks).map(([key, value]) => (
+                    <Thumbnail
+                      key={value.id}
+                      src={value.thumbnail}
+                      name={key}
+                      onClick={() => history.push(`/drink/${value.id}`)}
+                    />
+                  ))
+                )}
+              </ThumbnailContainer>
+            </>
           )}
         </PartyContainer>
       )}
