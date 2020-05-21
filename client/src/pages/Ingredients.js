@@ -10,8 +10,8 @@ import FullWrapper from '../components/FullWrapper';
 import useGetIngredients from '../hooks/useGetIngredients';
 import useGetParty from '../hooks/useGetParty';
 import Modal from '../components/Modal';
-import Button from '../components/Button';
 import Header from '../components/Header';
+import ErrorMessage from '../components/ErrorMessage';
 
 export default function Ingredients() {
   const history = useHistory();
@@ -57,10 +57,11 @@ export default function Ingredients() {
       {partyError && (
         <FullWrapper>
           <Header />
-          <p>Could not find a party.</p>
-          <Button background={'primary'} onClick={() => history.push('/')}>
-            Return to Home
-          </Button>
+          <ErrorMessage
+            message={'Could not find a party'}
+            btntext={'Return to Home'}
+            link={'/'}
+          />
         </FullWrapper>
       )}
       {party && (
