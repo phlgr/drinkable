@@ -56,7 +56,7 @@ export default function Party() {
                         'We could not find any drinks. Try adding more ingredients :)'
                       }
                       btntext={'Add Ingredients'}
-                      link={''}
+                      link={`/party/${id}/ingredients`}
                     />
                   </>
                 ) : (
