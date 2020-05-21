@@ -9,6 +9,7 @@ import PartyContainer from '../components/PartyContainer';
 import Loading from '../components/Loading';
 import ListItem from '../components/ListItem';
 import Modal from '../components/Modal';
+import ErrorMessage from '../components/ErrorMessage';
 
 const AddButton = styled.img`
   margin: 20px;
@@ -55,19 +56,29 @@ export default function PartyIngredients() {
             party={party}
             onPartyNameChange={doGetParty}
           >
-            {Object.entries(party.ingredients).map(([key, value]) => (
-              <ListItem
-                key={key}
-                ingredient={key}
-                amount={value.quantity}
-                onEditButtonClick={onIngredientEditButtonClick}
+            {Object.keys(party.ingredients).length === 0 ? (
+              <ErrorMessage
+                message={'You have not added any Ingredients yet'}
+                btntext={'Add Ingredients'}
+                link={`/party/${id}/ingredients`}
               />
-            ))}
-            <AddButton
-              alt="Add Button"
-              src={AddIcon}
-              onClick={() => history.push(`/party/${id}/ingredients`)}
-            />
+            ) : (
+              <>
+                {Object.entries(party.ingredients).map(([key, value]) => (
+                  <ListItem
+                    key={key}
+                    ingredient={key}
+                    amount={value.quantity}
+                    onEditButtonClick={onIngredientEditButtonClick}
+                  />
+                ))}
+                <AddButton
+                  alt="Add Button"
+                  src={AddIcon}
+                  onClick={() => history.push(`/party/${id}/ingredients`)}
+                />
+              </>
+            )}
           </PartyContainer>
         </>
       )}
