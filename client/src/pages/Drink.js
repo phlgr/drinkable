@@ -4,17 +4,10 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import useGetDrinkDetails from '../hooks/useGetDrinkDetails';
 
+import FullWrapper from '../components/FullWrapper';
 import Header from '../components/Header';
 import Arrow from '../assets/return-arrow.svg';
 import Loading from '../components/Loading';
-
-const FullWrapper = styled.div`
-  position: fixed;
-  padding: 20px;
-  height: 100%;
-  width: 100vw;
-  color: ${(props) => props.theme.secondaryActive};
-`;
 
 const HeaderContainer = styled.div`
   display: flex;

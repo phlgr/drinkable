@@ -6,9 +6,12 @@ import SearchInput from '../components/SearchInput';
 import Loading from '../components/Loading';
 import Ingredient from '../components/Ingredient';
 
+import FullWrapper from '../components/FullWrapper';
 import useGetIngredients from '../hooks/useGetIngredients';
 import useGetParty from '../hooks/useGetParty';
 import Modal from '../components/Modal';
+import Header from '../components/Header';
+import ErrorMessage from '../components/ErrorMessage';
 
 export default function Ingredients() {
   const history = useHistory();
@@ -51,7 +54,16 @@ export default function Ingredients() {
   return (
     <>
       {partyLoading && <Loading fullscreen />}
-      {partyError && <p>No party found :(</p>}
+      {partyError && (
+        <FullWrapper>
+          <Header />
+          <ErrorMessage
+            message={'Could not find a party'}
+            btntext={'Return to Home'}
+            link={'/'}
+          />
+        </FullWrapper>
+      )}
       {party && (
         <>
           {modal && (
