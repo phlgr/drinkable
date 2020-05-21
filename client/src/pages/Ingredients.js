@@ -6,9 +6,12 @@ import SearchInput from '../components/SearchInput';
 import Loading from '../components/Loading';
 import Ingredient from '../components/Ingredient';
 
+import FullWrapper from '../components/FullWrapper';
 import useGetIngredients from '../hooks/useGetIngredients';
 import useGetParty from '../hooks/useGetParty';
 import Modal from '../components/Modal';
+import Button from '../components/Button';
+import Header from '../components/Header';
 
 export default function Ingredients() {
   const history = useHistory();
@@ -51,7 +54,15 @@ export default function Ingredients() {
   return (
     <>
       {partyLoading && <Loading fullscreen />}
-      {partyError && <p>No party found :(</p>}
+      {partyError && (
+        <FullWrapper>
+          <Header />
+          <p>Could not find a party.</p>
+          <Button background={'primary'} onClick={() => history.push('/')}>
+            Return to Home
+          </Button>
+        </FullWrapper>
+      )}
       {party && (
         <>
           {modal && (
