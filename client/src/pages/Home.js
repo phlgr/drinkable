@@ -10,7 +10,6 @@ import backgroundImage from '../assets/home-background.png';
 import Loading from '../components/Loading';
 
 const BorderContainer = styled.div`
-  position: fixed;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
@@ -42,9 +41,8 @@ const SecondaryContainer = styled.div`
   flex-flow: column wrap;
   background: ${(props) => props.theme.secondaryActive};
   color: white;
-  padding: 40px 20px 60px;
+  padding: 20px;
   flex-grow: 1;
-  align-items: center;
   h2 {
     margin: 0;
   }
@@ -62,6 +60,8 @@ const SecondaryContainer = styled.div`
 const InstructionContainer = styled.div``;
 
 const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
   background: ${(props) => props.theme.background};
   width: 100%;
   text-align: center;
