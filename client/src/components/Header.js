@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   display: flex;
-  flex-basis: 100%;
   align-items: center;
+  margin-right: auto;
+  cursor: pointer;
 `;
 
 const Heading = styled.h1`
