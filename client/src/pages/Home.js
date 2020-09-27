@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
+import { mq } from '../themes/GlobalStyles';
 import { useHistory } from 'react-router-dom';
 import usePostParty from '../hooks/usePostParty';
 
@@ -14,6 +14,9 @@ const BorderContainer = styled.div`
   flex-flow: column nowrap;
   width: 100%;
   height: 100%;
+  @media (min-width: var(--sm)) {
+    flex-flow: row wrap;
+  }
 `;
 
 const PrimaryContainer = styled.div`
@@ -26,7 +29,20 @@ const PrimaryContainer = styled.div`
   justify-content: flex-end;
   align-items:flex-end;
   max-height: 300px;
+
+  ${mq('sm')} {
+    max-height:100%;
+    height:80vh;
+    align-items:flex-start;
+  }
 `;
+
+const PrimaryContent = styled.div`
+  flex-basis: 100%;
+  text-align: center;
+  margin: 0 50px;
+`;
+
 const InfoText = styled.div`
   line-height: 26px;
   font-weight: 300;
@@ -37,6 +53,9 @@ const InfoText = styled.div`
 `;
 
 const SecondaryContainer = styled.div`
+  ${mq('sm')} {
+    display: none;
+  }
   display: flex;
   flex-flow: column wrap;
   background: ${(props) => props.theme.secondaryActive};
@@ -63,7 +82,7 @@ const Footer = styled.footer`
   position: fixed;
   bottom: 0;
   background: ${(props) => props.theme.background};
-  width: 100%;
+  max-width: 100%;
   text-align: center;
   padding: 3px 0;
   font-size: 0.8rem;
@@ -88,14 +107,16 @@ export default function Home() {
       <BorderContainer>
         <PrimaryContainer>
           <Header />
-          <InfoText>
-            Organise the drinks of your next Party with drinkable!
-          </InfoText>
-          <Button background="primary" onClick={partyButtonHandleCLick}>
-            {!loading && !error && 'Plan a Party!'}
+          <PrimaryContent>
+            <InfoText>
+              Organise the drinks of your next Party with drinkable!
+            </InfoText>
+            <Button background="primary" onClick={partyButtonHandleCLick}>
+              {!loading && !error && 'Plan a Party!'}
 
-            {error && 'Try again!'}
-          </Button>
+              {error && 'Try again!'}
+            </Button>
+          </PrimaryContent>
         </PrimaryContainer>
         <SecondaryContainer>
           <InstructionContainer>
