@@ -14,8 +14,8 @@ const BorderContainer = styled.div`
   flex-flow: column nowrap;
   width: 100%;
   height: 100%;
-  @media (min-width: var(--sm)) {
-    flex-flow: row wrap;
+  ${mq('lg')} {
+    flex-flow: row;
   }
 `;
 
@@ -35,6 +35,10 @@ const PrimaryContainer = styled.div`
     height:80vh;
     align-items:flex-start;
   }
+
+  ${mq('lg')} {
+    width:50%
+  }
 `;
 
 const PrimaryContent = styled.div`
@@ -53,9 +57,6 @@ const InfoText = styled.div`
 `;
 
 const SecondaryContainer = styled.div`
-  ${mq('sm')} {
-    display: none;
-  }
   display: flex;
   flex-flow: column wrap;
   background: ${(props) => props.theme.secondaryActive};
@@ -73,6 +74,18 @@ const SecondaryContainer = styled.div`
   }
   Button {
     align-self: flex-end;
+  }
+
+  ${mq('sm')} {
+    display: none;
+  }
+  ${mq('lg')} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    Button {
+      align-self: center;
+    }
   }
 `;
 
