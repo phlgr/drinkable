@@ -46,7 +46,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.7"
   },
   "cacheDirectories": [
     "client/node_modules",
